@@ -211,26 +211,21 @@
         <div class="dlabnav-scroll">
             <ul class="metismenu" id="menu">
                 <li class="nav-label first">Main Menu</li>
+
                 <li>
-                    <a class="has-arrow" href="" aria-expanded="false">
+                    <a class="has-arrow" href="#" aria-expanded="false">
                         <i class="la la-home"></i>
                         <span class="nav-text">Dashboard</span>
                     </a>
+                </li>
 
-                </li>
-                <li>
-                    <a class="ai-icon" href="event-management.html" aria-expanded="false">
-                        <i class="la la-calendar"></i>
-                        <span class="nav-text">Event Management</span>
-                    </a>
-                </li>
                 <li>
                     <a class="has-arrow" href="#" data-toggle="collapse" data-target="#professorsMenu" aria-expanded="false">
                         <i class="la la-user"></i>
                         <span class="nav-text">Professors</span>
                     </a>
                     <ul id="professorsMenu" class="collapse" aria-expanded="false">
-                        <li><a href="all-professors.html">All Professor</a></li>
+                        <li><a href="{{ path('app_list_professors') }}">All Professor</a></li>
                         <li><a href="add-professor.html">Add Professor</a></li>
                         <li><a href="edit-professor.html">Edit Professor</a></li>
                         <li><a href="professor-profile.html">Professor Profile</a></li>
@@ -250,7 +245,6 @@
                     </ul>
                 </li>
 
-
                 <li>
                     <a class="has-arrow" href="#" data-toggle="collapse" data-target="#reclamationsMenu" aria-expanded="false">
                         <i class="la la-comment"></i>
@@ -265,47 +259,86 @@
 
 
                 <li>
+                    <a class="has-arrow" href="#" data-toggle="collapse" data-target="#SupportUnitMenu" aria-expanded="false">
+                        <i class="la la-comment"></i>
+                        <span class="nav-text">Support Unit</span>
+                    </a>
+                    <ul id="SupportUnitMenu" class="collapse" aria-expanded="false">
+                        <li><a href="see-all-support-unit-reservations.html">See All Support Unit Reservations</a></li>
+                        <li><a href="respond-support-unit.html">Respond to a Support Unit</a></li>
+                    </ul>
+                </li>
+
+
+
+                <li>
                     <a class="has-arrow" href="#" data-toggle="collapse" data-target="#coursesMenu" aria-expanded="false">
                         <i class="la la-graduation-cap"></i>
                         <span class="nav-text">Courses</span>
                     </a>
                     <ul id="coursesMenu" class="collapse" aria-expanded="false">
                         <li><a href="all-courses.html">All Courses</a></li>
-                        <li><a href="add-courses.html">Add Course</a></li>
+                        <li><a href="add-courses.html">Add Courses</a></li>
                         <li><a href="edit-courses.html">Edit Course</a></li>
                         <li><a href="course-details.html">Course Details</a></li>
                     </ul>
                 </li>
-
-
-                <!-- All other sidebar items -->
                 <li>
-                    <a class="has-arrow" href="#" data-toggle="collapse" data-target="#pagesMenu" aria-expanded="false">
-                        <i class="la la-th-list"></i>
-                        <span class="nav-text">Pages</span>
+                    <a class="has-arrow" href="javascript:void(0)" data-toggle="collapse" data-target="#libraryMenu" aria-expanded="false">
+                        <i class="la la-book"></i>
+                        <span class="nav-text">Library</span>
                     </a>
-                    <ul id="pagesMenu" class="collapse" aria-expanded="false">
-                        <li><a href="page-register.html">Register</a></li>
-                        <li><a href="page-login.html">Login</a></li>
-                        <li>
-                            <a class="has-arrow" href="#" data-toggle="collapse" data-target="#errorMenu" aria-expanded="false">
-                                <span class="nav-text">Error</span>
-                            </a>
-                            <ul id="errorMenu" class="collapse" aria-expanded="false">
-                                <li><a href="page-error-400.html">Error 400</a></li>
-                                <li><a href="page-error-403.html">Error 403</a></li>
-                                <li><a href="page-error-404.html">Error 404</a></li>
-                                <li><a href="page-error-500.html">Error 500</a></li>
-                                <li><a href="page-error-503.html">Error 503</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="page-lock-screen.html">Lock Screen</a></li>
+                    <ul id="libraryMenu" class="collapse">
+                        <li><a href="all-library.html">All Books</a></li>
+                        <li><a href="add-library.html">Add Book</a></li>
+                        <li><a href="edit-library.html">Edit Book</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void(0)" data-toggle="collapse" data-target="#staffMenu" aria-expanded="false">
+                        <i class="la la-users"></i>
+                        <span class="nav-text">Recruitment</span>
+                    </a>
+                    <ul id="staffMenu" class="collapse">
+                        <li><a href="all-staff.html">All Staff</a></li>
+                        <li><a href="add-staff.html">Add Staff</a></li>
+                        <li><a href="edit-staff.html">Edit Staff</a></li>
+                        <li><a href="staff-profile.html">Staff Profile</a></li>
                     </ul>
                 </li>
 
+
+
+                <li>
+                    <a class="has-arrow" href="#" data-toggle="collapse" data-target="#boursesMenu" aria-expanded="false">
+                        <i class="la la-graduation-cap"></i>
+                        <span class="nav-text">Bourses</span>
+                    </a>
+                    <ul id="boursesMenu" class="collapse" aria-expanded="false">
+                        <li><a href="all-bourses.html">All Bourses</a></li>
+                        <li><a href="add-bourses.html">Add Bourses</a></li>
+                        <li><a href="edit-bourses.html">Edit Bourse</a></li>
+                        <li><a href="bourse-takers.html">Bourse Takers</a></li>
+                    </ul>
+                </li>
+
+                <!-- Additional sidebar items... -->
+
             </ul>
         </div>
-    </div>
+    </div></div>
+
+    <!-- JavaScript to ensure only one submenu opens at a time -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.has-arrow').on('click', function() {
+                // Collapse any open submenus
+                $('.collapse').not($(this).next()).collapse('hide');
+            });
+        });
+    </script>
+
     <!--**********************************
         Sidebar end
     ***********************************-->
@@ -323,26 +356,9 @@
         Content body end
     ***********************************-->
 
-    <!--**********************************
-        Footer start
-    ***********************************-->
-    <div class="footer">
-        <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="../index.htm" target="_blank">DexignLab</a> 2020</p>
-        </div>
-    </div>
-    <!--**********************************
-        Footer end
-    ***********************************-->
+    <!--*************************
 
-</div>
-<!--**********************************
-    Main wrapper end
-***********************************-->
-
-<!--**********************************
-    Scripts
-***********************************-->
+-->
 <!-- Required vendors -->
 <script src="{{ asset('vendor1/global/global.min.js') }}"></script>
 <script src="{{ asset('vendor1/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>

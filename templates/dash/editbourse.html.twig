@@ -1,0 +1,136 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Courses{% endblock %}
+
+{% block content %}
+
+
+    <div class="row page-titles mx-0">
+        <div class="col-sm-6 p-md-0">
+            <div class="welcome-text">
+                <h4>Add Bourse</h4>
+            </div>
+        </div>
+        <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0);">Bourses</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0);">Edit Bourse</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 col-xxl-12 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Basic Info</h5>
+                </div>
+                <div class="card-body">
+                    <form action="#" method="post">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Bourse Name</label>
+                                    <input type="text" class="form-control" value="iyed bourse">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Duration</label>
+                                    <input type="text" class="form-control" value="6mois">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Email of school</label>
+                                    <input type="text" class="form-control" value="esprit@gmail.tn">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Bourse Responsible</label>
+                                    <input name="datepicker" class="datepicker-default form-control" id="datepicker" value="iyed omri responsable">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Funding Source</label>
+                                    <input type="text" class="form-control" value="bank">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Application Method</label>
+                                    <select class="form-control">
+                                        <option value="Online Application Portal">Online Application Portal</option>
+                                        <option value="Email Submission">Email Submission</option>
+                                        <option value="Paper Application">Paper Application</option>
+                                        <option value="In-Person Submission">In-Person Submission</option>
+                                        <option value="Institutional Nomination or Recommendation">Institutional Nomination or Recommendation</option>
+                                        <option value="call application">call application</option>
+                                        <option value="Interview-Based Application">Interview-Based Application</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Type</label>
+                                    <select class="form-control">
+
+                                        <option value="Athletic Bourses">Athletic Bourses</option>
+                                        <option value="Need-Based Bourses">Need-Based Bourses</option>
+                                        <option value="Subject-Specific Bourses:">Subject-Specific Bourses:</option>
+                                        <option value="Community Service or Leadership Bourses">Community Service or Leadership Bourses</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Eligibility Criteria</label>
+                                    <input type="text" class="form-control" value="moyenne>16">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Amount</label>
+                                    <input type="text" class="form-control" value="25.000tnd">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Application Deadline</label>
+                                    <input type="text" class="form-control" value="06/03/2025">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Interview  Date</label>
+                                    <input name="datepicker" class="datepicker-default form-control" id="datepicker1" 10/01/2025>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Description</label>
+                                    <textarea class="form-control" rows="5" >For the upcoming academic year, the Elite Sports Scholarship Rhine-Neckar Metropolitan Region is a notable program. This scholarship aids athletes in managing their dual careers by providing financial support and flexible academic arrangements.
+</textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group fallback w-100">
+                                    <input type="file" class="dropify" data-default-file="">
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-light">Cencel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
