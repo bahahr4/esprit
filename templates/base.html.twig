@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Edumin - Bootstrap Admin Dashboard</title>
+    <title>ESPRIT Admin Dashboard</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('vendor1/jqvmap/css/jqvmap.min.css') }}">
@@ -213,7 +213,7 @@
                 <li class="nav-label first">Main Menu</li>
 
                 <li>
-                    <a class="has-arrow" href="#" aria-expanded="false">
+                    <a class="has-arrow" href="{{ path('app_dash') }}" aria-expanded="false">
                         <i class="la la-home"></i>
                         <span class="nav-text">Dashboard</span>
                     </a>
@@ -238,10 +238,10 @@
                         <span class="nav-text">Student</span>
                     </a>
                     <ul id="studentsMenu" class="collapse" aria-expanded="false">
-                        <li><a href="all-students.html">All Student</a></li>
+                        <li><a href="{{ path('app_list_students') }}">All Student</a></li>
                         <li><a href="add-students.html">Add Student</a></li>
-                        <li><a href="edit-students.html">Edit Student</a></li>
-                        <li><a href="student-profile.html">About Students</a></li>
+                        <li><a href="{{ path('app_list_students') }}">Edit Student</a></li>
+                        <li><a href="{{ path('app_list_students') }}">About Students</a></li>
                     </ul>
                 </li>
 
@@ -251,9 +251,9 @@
                         <span class="nav-text">Reclamations</span>
                     </a>
                     <ul id="reclamationsMenu" class="collapse" aria-expanded="false">
-                        <li><a href="see-all-reclamations.html">See All Reclamations</a></li>
-                        <li><a href="respond-reclamation.html">Respond to a Reclamation</a></li>
-                        <li><a href="delete-reclamation.html">Delete a Reclamation</a></li>
+                        <li><a href="{{ path('app_list_reclamation') }}">See All Reclamations</a></li>
+                        <li><a href="{{ path('app_respond_reclamation') }}">Respond to a Reclamation</a></li>
+                        <li><a href="{{ path('app_list_reclamation') }}">Delete a Reclamation</a></li>
                     </ul>
                 </li>
 
@@ -264,8 +264,8 @@
                         <span class="nav-text">Support Unit</span>
                     </a>
                     <ul id="SupportUnitMenu" class="collapse" aria-expanded="false">
-                        <li><a href="see-all-support-unit-reservations.html">See All Support Unit Reservations</a></li>
-                        <li><a href="respond-support-unit.html">Respond to a Support Unit</a></li>
+                        <li><a href="{{ path('app_list_support') }}">See All Support Unit Reservations</a></li>
+                        <li><a href="{{ path('app_respond_support') }}">Respond to a Support Unit</a></li>
                     </ul>
                 </li>
 
@@ -277,8 +277,8 @@
                         <span class="nav-text">Courses</span>
                     </a>
                     <ul id="coursesMenu" class="collapse" aria-expanded="false">
-                        <li><a href="all-courses.html">All Courses</a></li>
-                        <li><a href="add-courses.html">Add Courses</a></li>
+                        <li><a href="{{ path('app_list_courses') }}">All Courses</a></li>
+                        <li><a href="{{ path('app_list_courses') }}">Add Courses</a></li>
                         <li><a href="edit-courses.html">Edit Course</a></li>
                         <li><a href="course-details.html">Course Details</a></li>
                     </ul>
@@ -300,10 +300,10 @@
                         <span class="nav-text">Recruitment</span>
                     </a>
                     <ul id="staffMenu" class="collapse">
-                        <li><a href="all-staff.html">All Staff</a></li>
-                        <li><a href="add-staff.html">Add Staff</a></li>
-                        <li><a href="edit-staff.html">Edit Staff</a></li>
-                        <li><a href="staff-profile.html">Staff Profile</a></li>
+                        <li><a href="{{ path('app_all_staff') }}">All Staff</a></li>
+                        <li><a href="{{ path('app_add_staff') }}">Add Staff</a></li>
+                        <li><a href="{{ path('app_edit_staff') }}">Edit Staff</a></li>
+                        <li><a href="{{ path('app_profile_staff') }}">Staff Profile</a></li>
                     </ul>
                 </li>
 
@@ -315,10 +315,24 @@
                         <span class="nav-text">Bourses</span>
                     </a>
                     <ul id="boursesMenu" class="collapse" aria-expanded="false">
-                        <li><a href="all-bourses.html">All Bourses</a></li>
-                        <li><a href="add-bourses.html">Add Bourses</a></li>
-                        <li><a href="edit-bourses.html">Edit Bourse</a></li>
-                        <li><a href="bourse-takers.html">Bourse Takers</a></li>
+                        <li><a href="{{ path('app_list_bourses') }}">All Bourses</a></li>
+                        <li><a href="{{ path('app_add_bourses') }}">Add Bourses</a></li>
+                        <li><a href="{{ path('app_edit_bourses') }}">Edit Bourse</a></li>
+                        <li><a href="{{ path('app_list_bourses') }}">Bourse Takers</a></li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a class="has-arrow" href="#" data-toggle="collapse" data-target="#restaurantMenu" aria-expanded="false">
+                        <i class="la la-utensils"></i>
+                        <span class="nav-text">Restaurant</span>
+                    </a>
+                    <ul id="restaurantMenu" class="collapse">
+                        <li><a href="{{ path('app_payresto') }}">Restaurant Paiement</a></li>
+                        <li><a href="">2</a></li>
+                        <li><a href="">3</a></li>
+                        <li><a href="">4</a></li>
                     </ul>
                 </li>
 

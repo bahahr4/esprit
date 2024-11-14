@@ -103,6 +103,18 @@ class DashController extends AbstractController
         return $this->render('dash/respondsupport.html.twig');
     }
 
+    #[Route('/payresto', name: 'app_payresto')]
+    public function payresto(): Response
+    {
+        return $this->render('dash/payresto.html.twig');
+    }
+
+#[Route('/gestionlivraison', name: 'app_gestion_livraison')]
+    public function gestionlivraison(): Response
+    {
+        return $this->render('dash/gestionlivraison.html.twig');
+    }
+
 
 
 }
