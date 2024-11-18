@@ -29,7 +29,6 @@ class Student
     private string $gender;
 
 
-
     public function getId(): ?int
     {
         return $this->id;
