@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\StudentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -35,11 +36,7 @@ class DashController extends AbstractController
     }
 
 
-    #[Route('/liststudents', name: 'app_list_students')]
-    public function liststudents(): Response
-    {
-        return $this->render('dash/liststudents.html.twig');
-    }
+
 
     #[Route('/listreclamation', name: 'app_list_reclamation')]
     public function listreclamation(): Response
@@ -114,6 +111,56 @@ class DashController extends AbstractController
     {
         return $this->render('dash/gestionlivraison.html.twig');
     }
+
+
+    #[Route('/liststudents', name: 'app_list_students')]
+    public function liststudents(StudentRepository $studentRepository): Response
+    {
+        return $this->render('dash/liststudents.html.twig',["students" => $studentRepository->findAll()]);
+    }
+
+
+
+    #[Route('/dash', name: 'app_dash')]
+    public function dashboard(StudentRepository $studentRepository): Response
+    {
+        // Compter le nombre total d'étudiants
+        $totalStudents = $studentRepository->count([]);
+
+        // Compter le nombre d'étudiants masculins
+        $maleStudents = $studentRepository->count(['gender' => 'Male']);
+
+        // Compter le nombre d'étudiants féminins
+        $femaleStudents = $studentRepository->count(['gender' => 'Female']);
+
+        // Calculer les pourcentages, en évitant la division par zéro
+        $malePercentage = ($totalStudents > 0) ? ($maleStudents / $totalStudents) * 100 : 0;
+        $femalePercentage = ($totalStudents > 0) ? ($femaleStudents / $totalStudents) * 100 : 0;
+
+        // Passer les données à la vue
+        return $this->render('dash/index.html.twig', [
+            'total_students' => $totalStudents,
+            'male_students' => $maleStudents,
+            'female_students' => $femaleStudents,
+            'male_percentage' => $malePercentage,
+            'female_percentage' => $femalePercentage,
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
