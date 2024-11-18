@@ -28,6 +28,17 @@ class Student
     #[ORM\Column(length: 10)] // Nouveau champ
     private string $gender;
 
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $createdAt = null;
+
+    #[ORM\Column(type: 'date')]
+    private ?\DateTimeInterface $datecreation = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime(); // Initialise la date actuelle à la création
+        $this->datecreation = new \DateTime(); // Initialise la date actuelle pour la création du compte
+    }
 
 
     public function getId(): ?int
@@ -98,6 +109,30 @@ class Student
     public function setGender(string $gender): static
     {
         $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getDatecreation(): ?\DateTimeInterface
+    {
+        return $this->datecreation;
+    }
+
+    public function setDatecreation(\DateTimeInterface $datecreation): static
+    {
+        $this->datecreation = $datecreation;
 
         return $this;
     }
