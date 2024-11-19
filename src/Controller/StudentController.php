@@ -9,10 +9,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/student')]
-class StudentController extends AbstractController
+final class StudentController extends AbstractController
 {
     #[Route(name: 'app_student_index', methods: ['GET'])]
     public function index(StudentRepository $studentRepository): Response
@@ -71,7 +71,7 @@ class StudentController extends AbstractController
     #[Route('/{id}', name: 'app_student_delete', methods: ['POST'])]
     public function delete(Request $request, Student $student, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $student->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$student->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($student);
             $entityManager->flush();
         }
