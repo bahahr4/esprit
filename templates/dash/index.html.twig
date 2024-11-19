@@ -70,12 +70,14 @@
         <div class="col-xl-3 col-xxl-3 col-sm-6">
             <div class="widget-stat card bg-success overflow-hidden">
                 <div class="card-header">
-                    <h3 class="card-title text-white">New Students (Last 7 Days)</h3>
-                    <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> {{ new_students }}</h5>
+                    <h3 class="card-title text-white">New Students</h3>
+                    <h5 class="text-white mb-0">
+                        <i class="fa fa-caret-up"></i> {{ new_students }}
+                    </h5>
                 </div>
                 <div class="card-body text-center mt-4 p-0">
                     <div class="ico-sparkline">
-                        <div id="spark-bar-2" data-students-per-day="{{ students_per_day }}"></div>
+                        <div id="spark-bar-2"></div>
                     </div>
                 </div>
             </div>
@@ -83,15 +85,16 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-                var studentsPerDayData = document.getElementById("spark-bar-2").dataset.studentsPerDay.split(',');
-                $("#spark-bar-2").sparkline(studentsPerDayData, {
-                    type: "bar",
-                    height: "140",
-                    width: 100,
-                    barWidth: 10,
-                    barSpacing: 10,
-                    barColor: "rgb(200, 255, 135)"
-                });
+                if (document.getElementById('spark-bar-2')) {
+                    $("#spark-bar-2").sparkline([{{ students_per_day }}], {
+                        type: "bar",
+                        height: "140",
+                        width: "100%",
+                        barWidth: 10,
+                        barSpacing: 5,
+                        barColor: "rgb(200, 255, 135)"
+                    });
+                }
             });
         </script>
 

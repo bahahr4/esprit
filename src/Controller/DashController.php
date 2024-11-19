@@ -10,6 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashController extends AbstractController
 {
+
+
     #[Route('/dash', name: 'app_dash')]
     public function dashboard(StudentRepository $studentRepository, EntityManagerInterface $entityManager): Response
     {
@@ -74,6 +76,7 @@ class DashController extends AbstractController
     {
         return $this->render('user/user.html.twig');
     }
+
 
     #[Route('/listprofessors', name: 'app_list_professors')]
     public function listProfessors(): Response
