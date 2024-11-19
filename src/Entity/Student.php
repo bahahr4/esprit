@@ -40,7 +40,6 @@ class Student
         $this->datecreation = new \DateTime(); // Initialise la date actuelle pour la création du compte
     }
 
-
     public function getId(): ?int
     {
         return $this->id;
