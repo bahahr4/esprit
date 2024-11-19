@@ -2,10 +2,49 @@
 
 {% block title %}New Professor{% endblock %}
 
-{% block body %}
-    <h1>Create new Professor</h1>
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Create New Professor</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
 
-    {{ include('professor/_form.html.twig') }}
+                        <div class="form-group mb-3">
+                            {{ form_label(form.name, 'Name', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.name) }}
+                        </div>
 
-    <a href="{{ path('app_professor_index') }}">back to list</a>
+                        <div class="form-group mb-3">
+                            {{ form_label(form.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.PhoneNumberProf, 'Phone Number', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.PhoneNumberProf, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.PhoneNumberProf) }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ form_label(form.password, 'Password', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.password, {'attr': {'class': 'form-control', 'type': 'password'}}) }}
+                            {{ form_errors(form.password) }}
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Save</button>
+
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
 {% endblock %}

@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/professor')]
 final class ProfessorController extends AbstractController
@@ -17,7 +17,7 @@ final class ProfessorController extends AbstractController
     #[Route(name: 'app_professor_index', methods: ['GET'])]
     public function index(ProfessorRepository $professorRepository): Response
     {
-        return $this->render('professor/index.html.twig', [
+        return $this->render('dash/listprofessors.html.twig', [
             'professors' => $professorRepository->findAll(),
         ]);
     }
@@ -71,11 +71,14 @@ final class ProfessorController extends AbstractController
     #[Route('/{id}', name: 'app_professor_delete', methods: ['POST'])]
     public function delete(Request $request, Professor $professor, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$professor->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$professor->getId(), $request->request->get('_token'))) {
             $entityManager->remove($professor);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('app_professor_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }
+

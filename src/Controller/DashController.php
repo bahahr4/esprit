@@ -172,4 +172,5 @@ class DashController extends AbstractController
             'students' => $studentRepository->findAll(),
         ]);
     }
+
 }

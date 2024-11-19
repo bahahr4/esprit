@@ -22,8 +22,6 @@ class Professor
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $idprof = null;
 
     #[ORM\Column]
     private ?int $PhoneNumberProf = null;
@@ -69,17 +67,9 @@ class Professor
         return $this;
     }
 
-    public function getIdprof(): ?string
-    {
-        return $this->idprof;
-    }
 
-    public function setIdprof(string $idprof): static
-    {
-        $this->idprof = $idprof;
 
-        return $this;
-    }
+
 
     public function getPhoneNumberProf(): ?int
     {
