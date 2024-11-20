@@ -7,16 +7,18 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ProfessorRepository;
 
 class DashController extends AbstractController
 {
 
 
     #[Route('/dash', name: 'app_dash')]
-    public function dashboard(StudentRepository $studentRepository, EntityManagerInterface $entityManager): Response
+    public function dashboard(StudentRepository $studentRepository,ProfessorRepository $professorRepository, EntityManagerInterface $entityManager): Response
     {
         // Compter le nombre total d'étudiants
         $totalStudents = $studentRepository->count([]);
+        $totalProfessors = $professorRepository->count([]);
 
         // Compter le nombre d'étudiants masculins et féminins
         $maleStudents = $studentRepository->count(['gender' => 'Male']);
@@ -68,6 +70,7 @@ class DashController extends AbstractController
             'female_percentage' => $femalePercentage,
             'new_students' => array_sum($studentsPerDayData),  // Ajout du nombre total de nouveaux étudiants
             'students_per_day' => $studentsPerDayString,       // Ajout des étudiants créés par jour
+            'total_professors' => $totalProfessors,
         ]);
     }
 
