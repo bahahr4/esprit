@@ -52,6 +52,7 @@
                                         <th>Id</th>
                                         <th>Type</th>
                                         <th>Description</th>
+                                        <th>Date Reclamation</th> <!-- Ajout de la colonne 'Date Reclamation' -->
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
@@ -61,6 +62,7 @@
                                             <td>{{ reclamation.id }}</td>
                                             <td>{{ reclamation.type }}</td>
                                             <td>{{ reclamation.description }}</td>
+                                            <td>{{ reclamation.daterecl ? reclamation.daterecl|date('Y-m-d') : 'N/A' }}</td> <!-- Affichage de la date -->
                                             <td>
                                                 <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}" class="btn btn-info btn-sm"><i class="la la-eye"></i> Show</a>
                                                 <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}" class="btn btn-primary btn-sm"><i class="la la-pencil"></i> Edit</a>

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ReclamationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -36,6 +37,9 @@ class Reclamation
 
     #[ORM\OneToMany(targetEntity: Reply::class, mappedBy: 'reclamation', cascade: ['persist', 'remove'])]
     private Collection $replies;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $daterecl = null;
 
     public function __construct()
     {
@@ -97,6 +101,18 @@ class Reclamation
                 $reply->setReclamation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDaterecl(): ?\DateTimeInterface
+    {
+        return $this->daterecl;
+    }
+
+    public function setDaterecl(\DateTimeInterface $daterecl): static
+    {
+        $this->daterecl = $daterecl;
 
         return $this;
     }
