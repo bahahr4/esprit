@@ -7,7 +7,6 @@ use App\Entity\Reply;
 use App\Form\ReclamationType;
 use App\Form\ReplyType;
 use App\Repository\ReclamationRepository;
-use App\Repository\ReplyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,6 +36,7 @@ final class ReclamationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // The date is automatically set in the entity constructor
             $entityManager->persist($reclamation);
             $entityManager->flush();
 
@@ -94,7 +94,7 @@ final class ReclamationController extends AbstractController
     public function replyNew(Request $request, Reclamation $reclamation, EntityManagerInterface $entityManager): Response
     {
         $reply = new Reply();
-        $reply->setReclamation($reclamation); // Lier la réponse à la réclamation
+        $reply->setReclamation($reclamation);
 
         $form = $this->createForm(ReplyType::class, $reply);
         $form->handleRequest($request);

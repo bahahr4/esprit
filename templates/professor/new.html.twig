@@ -21,9 +21,21 @@
 
                         <div class="form-group mb-3">
                             {{ form_label(form.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
-                            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.email) }}
+                            {{ form_widget(form.email, {
+                            'attr': {
+                            'class': 'form-control',
+                            'placeholder': 'Enter your email address'
+                            }
+                            }) }}
+                            {% if form.email.vars.errors|length > 0 %}
+                                <div class="text-danger mt-1">
+                                    {% for error in form.email.vars.errors %}
+                                        {{ error.message }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
+
 
                         <div class="form-group mb-3">
                             {{ form_label(form.PhoneNumberProf, 'Phone Number', {'label_attr': {'class': 'form-label'}}) }}

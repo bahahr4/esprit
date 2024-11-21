@@ -5,8 +5,8 @@ namespace App\Entity;
 use App\Repository\ReclamationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 class Reclamation
@@ -17,23 +17,30 @@ class Reclamation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le type de réclamation ne peut pas être vide.")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: "Le type de réclamation ne peut pas dépasser {{ limit }} caractères."
+    )]
     private ?string $type = null;
 
-    #[ORM\Column(type: Types::TEXT)]  // Changement de 'string' à 'text' pour le contenu
+    #[ORM\Column(length: 500)]
+    #[Assert\NotBlank(message: "La description ne peut pas être vide.")]
+    #[Assert\Length(
+        min: 10,
+        max: 500,
+        minMessage: "La description doit contenir au moins {{ limit }} caractères.",
+        maxMessage: "La description ne peut pas dépasser {{ limit }} caractères."
+    )]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $datereclamation = null;
-
-    #[ORM\OneToMany(mappedBy: 'reclamation', targetEntity: Reply::class, cascade: ["persist", "remove"])]
+    #[ORM\OneToMany(targetEntity: Reply::class, mappedBy: 'reclamation', cascade: ['persist', 'remove'])]
     private Collection $replies;
 
     public function __construct()
     {
         $this->replies = new ArrayCollection();
     }
-
-    // Getters and Setters
 
     public function getId(): ?int
     {
@@ -45,7 +52,7 @@ class Reclamation
         return $this->type;
     }
 
-    public function setType(string $type): static
+    public function setType(string $type): self
     {
         $this->type = $type;
 
@@ -57,21 +64,9 @@ class Reclamation
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getDatereclamation(): ?\DateTimeInterface
-    {
-        return $this->datereclamation;
-    }
-
-    public function setDatereclamation(\DateTimeInterface $datereclamation): static
-    {
-        $this->datereclamation = $datereclamation;
 
         return $this;
     }
@@ -84,20 +79,20 @@ class Reclamation
         return $this->replies;
     }
 
-    public function addReply(Reply $reply): static
+    public function addReply(Reply $reply): self
     {
         if (!$this->replies->contains($reply)) {
             $this->replies->add($reply);
-            $reply->setReclamation($this); // Assurez-vous que la relation est correctement définie des deux côtés
+            $reply->setReclamation($this);
         }
 
         return $this;
     }
 
-    public function removeReply(Reply $reply): static
+    public function removeReply(Reply $reply): self
     {
         if ($this->replies->removeElement($reply)) {
-            // Set the owning side to null (unless already changed)
+            // set the owning side to null (unless already changed)
             if ($reply->getReclamation() === $this) {
                 $reply->setReclamation(null);
             }

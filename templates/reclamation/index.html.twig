@@ -52,7 +52,6 @@
                                         <th>Id</th>
                                         <th>Type</th>
                                         <th>Description</th>
-                                        <th>Date Reclamation</th>
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
@@ -62,7 +61,6 @@
                                             <td>{{ reclamation.id }}</td>
                                             <td>{{ reclamation.type }}</td>
                                             <td>{{ reclamation.description }}</td>
-                                            <td>{{ reclamation.datereclamation ? reclamation.datereclamation|date('Y-m-d') : '' }}</td>
                                             <td>
                                                 <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}" class="btn btn-info btn-sm"><i class="la la-eye"></i> Show</a>
                                                 <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}" class="btn btn-primary btn-sm"><i class="la la-pencil"></i> Edit</a>

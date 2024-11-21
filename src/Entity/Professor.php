@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProfessorRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProfessorRepository::class)]
 class Professor
@@ -17,6 +18,8 @@ class Professor
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "L'email ne peut pas être vide.")]
+    #[Assert\Email(message: "Veuillez entrer une adresse email valide.")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
