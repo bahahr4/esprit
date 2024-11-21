@@ -28,4 +28,6 @@ final class Version20241120204359 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE reclamation ADD date reclamation DATE DEFAULT \'CURRENT_TIMESTAMP\' NOT NULL, CHANGE description description LONGTEXT NOT NULL');
     }
+
+
 }
