@@ -44,6 +44,7 @@ class Reclamation
     public function __construct()
     {
         $this->replies = new ArrayCollection();
+        $this->daterecl = new \DateTime(); // Initialiser la date avec la date actuelle lors de la création de l'objet
     }
 
     public function getId(): ?int

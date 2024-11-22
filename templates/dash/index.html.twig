@@ -5,6 +5,7 @@
 {% block content %}
 
     <div class="row">
+        <!-- Total Students -->
         <div class="col-xl-3 col-xxl-3 col-sm-6">
             <div class="widget-stat card bg-primary overflow-hidden">
                 <div class="card-header">
@@ -19,54 +20,59 @@
                     </div>
 
                     <!-- Graphique circulaire pour la répartition -->
-                    <div class="chart-container" style="position: relative; height:30vh; width:30vh; margin: auto;">
+                    <div class="chart-container" style="position: relative; height:40vh; width:40vh; margin: auto;">
                         <canvas id="genderChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Chart.js Script pour la répartition des étudiants -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
-            var ctx = document.getElementById('genderChart').getContext('2d');
-            var genderChart = new Chart(ctx, {
-                type: 'doughnut', // Utilisation du type doughnut pour afficher un cercle divisé
-                data: {
-                    labels: ['Male', 'Female'],
-                    datasets: [{
-                        label: 'Percentage of Male and Female Students',
-                        data: [{{ male_percentage }}, {{ female_percentage }}],
-                        backgroundColor: [
-                            'rgba(54, 162, 235, 0.8)', // Couleur pour "Male"
-                            'rgba(255, 99, 132, 0.8)'  // Couleur pour "Female"
-                        ],
-                        borderColor: [
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 99, 132, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                color: 'white'
-                            }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(tooltipItem) {
-                                    return tooltipItem.label + ': ' + tooltipItem.raw.toFixed(2) + '%';
+            document.addEventListener("DOMContentLoaded", function () {
+                var ctx = document.getElementById('genderChart').getContext('2d');
+                var genderChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Male', 'Female'],
+                        datasets: [{
+                            label: 'Percentage of Male and Female Students',
+                            data: [{{ male_percentage }}, {{ female_percentage }}],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.8)',
+                                'rgba(255, 99, 132, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: 'white'
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        return tooltipItem.label + ': ' + tooltipItem.raw.toFixed(2) + '%';
+                                    }
                                 }
                             }
                         }
                     }
-                }
+                });
             });
         </script>
+
+        <!-- New Students (Last 7 Days) -->
         <div class="col-xl-3 col-xxl-3 col-sm-6">
             <div class="widget-stat card bg-success overflow-hidden">
                 <div class="card-header">
@@ -84,7 +90,7 @@
         </div>
 
         <script>
-            document.addEventListener("DOMContentLoaded", function() {
+            document.addEventListener("DOMContentLoaded", function () {
                 if (document.getElementById('spark-bar-2')) {
                     $("#spark-bar-2").sparkline([{{ students_per_day }}], {
                         type: "bar",
@@ -98,6 +104,7 @@
             });
         </script>
 
+        <!-- Total Professors -->
         <div class="col-xl-3 col-xxl-3 col-sm-6">
             <div class="widget-stat card bg-secondary overflow-hidden">
                 <div class="card-header pb-3">
@@ -108,400 +115,135 @@
                 </div>
                 <div class="card-body p-0 mt-2">
                     <div class="px-4">
-                <span class="bar1" data-peity='{ "fill": ["rgb(0, 0, 128)", "rgb(7, 135, 234)"]}'>
-                </span>
+                        <span class="bar1" data-peity='{ "fill": ["rgb(0, 0, 128)", "rgb(7, 135, 234)"]}'></span>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-xl-3 col-xxl-3 col-sm-6">
-            <div class="widget-stat card bg-danger overflow-hidden">
+<div class="col-xl-3 col-xxl-3 col-sm-6">
+            <div class="widget-stat card bg-secondary overflow-hidden">
                 <div class="card-header pb-3">
-                    <h3 class="card-title text-white">Total Staff</h3>
-                    <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> xxxx</h5>
+                    <h3 class="card-title text-white">Total Professors</h3>
+                    <h5 class="text-white mb-0">
+                        <i class="fa fa-caret-up"></i> {{ total_professors }}
+                    </h5>
                 </div>
-                <div class="card-body p-0 mt-1">
-                    <span class="peity-line-2" data-width="100%">7,6,8,7,3,8,3,3,6,5,9,2,8</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-6 col-xxl-6 col-sm-6">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Income/Expense Report</h3>
-                </div>
-                <div class="card-body">
-                    <canvas id="barChart_2"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-6 col-xxl-6 col-sm-6">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Income/Expense Report</h3>
-                </div>
-                <div class="card-body">
-                    <canvas id="areaChart_1"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-8 col-xxl-8 col-lg-8 col-md-12 col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Assign Task</h5>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table header-border table-hover verticle-middle">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Task</th>
-                                <th scope="col">Assigned Professors</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Progress</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>Working Design report</td>
-                                <td>Herman Beck</td>
-                                <td><span class="badge badge-rounded badge-primary">DONE</span></td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>2</th>
-                                <td>Fees Collection report</td>
-                                <td>Emma Watson</td>
-                                <td><span class="badge badge-rounded badge-warning">Panding</span></td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-warning" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>3</th>
-                                <td>Management report</td>
-                                <td>Mary Adams</td>
-                                <td><span class="badge badge-rounded badge-warning">Panding</span></td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-warning" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>4</th>
-                                <td>Library book status</td>
-                                <td>Caleb Richards</td>
-                                <td><span class="badge badge-rounded badge-danger">Suspended</span></td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-danger" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>5</th>
-                                <td>Placement status</td>
-                                <td>June Lane</td>
-                                <td><span class="badge badge-rounded badge-warning">Panding</span></td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-warning" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>6</th>
-                                <td>Working Design report</td>
-                                <td>Herman Beck</td>
-                                <td><span class="badge badge-rounded badge-primary">DONE</span></td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                <div class="card-body p-0 mt-2">
+                    <div class="px-4">
+                        <span class="bar1" data-peity='{ "fill": ["rgb(0, 0, 128)", "rgb(7, 135, 234)"]}'></span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-xxl-4 col-lg-4 col-md-12 col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Notifications</h4>
-                </div>
-                <div class="card-body">
-                    <div class="widget-todo dz-scroll" style="height:370px;" id="DZ_W_Notifications">
-                        <ul class="timeline">
-                            <li>
-                                <div class="timeline-badge primary"></div>
-                                <a class="timeline-panel text-muted mb-3 d-flex align-items-center" href="javascript:void(0);">
-                                    <img class="rounded-circle" alt="image" width="50"src="{{ asset('images/profile/bahapic.png') }}"
-                                    >
-                                    <div class="col">
-                                        <h5 class="mb-1">Dr Baha Hermassi</h5>
-                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="timeline-badge warning"></div>
-                                <a class="timeline-panel text-muted mb-3 d-flex align-items-center" href="javascript:void(0);">
-                                    <img class="rounded-circle" alt="image" width="50" src="{{ asset('images/profile/bahapic.png') }}">
-                                    <div class="col">
-                                        <h5 class="mb-1">baha 2</h5>
-                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="timeline-badge danger"></div>
-                                <a class="timeline-panel text-muted mb-3 d-flex align-items-center" href="javascript:void(0);">
-                                    <img class="rounded-circle" alt="image" width="50" src="{{ asset('images/profile/bahapic.png') }}">
-                                    <div class="col">
-                                        <h5 class="mb-1">Reminder for baha: event Time!</h5>
-                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="timeline-badge success"></div>
-                                <a class="timeline-panel text-muted mb-3 d-flex align-items-center" href="javascript:void(0);">
-                                    <img class="rounded-circle" alt="image" width="50" src="{{ asset('images/profile/bahapic.png') }}">
-                                    <div class="col">
-                                        <h5 class="mb-1">Dr baha Send you Photo</h5>
-                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="timeline-badge warning"></div>
-                                <a class="timeline-panel text-muted mb-3 d-flex align-items-center" href="javascript:void(0);">
-                                    <img class="rounded-circle" alt="image" width="50" src="{{ asset('images/profile/bahapic.png') }}">
-                                    <div class="col">
-                                        <h5 class="mb-1">baha 4</h5>
-                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="timeline-badge dark"></div>
-                                <a class="timeline-panel text-muted mb-3 d-flex align-items-center" href="javascript:void(0);">
-                                    <img class="rounded-circle" alt="image" width="50" src="{{ asset('images/profile/bahapic.png') }}">
-                                    <div class="col">
-                                        <h5 class="mb-1">Reminder for baha: event Time!</h5>
-                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                    </div>
-                                </a>
-                            </li>
 
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="card">
+        <!-- New Reclamations (Last 7 Days) -->
+        <div class="col-xl-6 col-xxl-6 col-sm-12">
+            <div class="widget-stat card bg-warning overflow-hidden">
                 <div class="card-header">
-                    <h4 class="card-title">New Student List </h4>
+                    <h3 class="card-title text-white">New Reclamations (last 7 days)</h3>
+                    <h5 class="text-white mb-0">
+                        <i class="fa fa-caret-up"></i> {{ newReclamationsCount }}
+                    </h5>
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped">
-                            <thead>
-                            <tr>
-                                <th class="px-5 py-3">Name</th>
-                                <th class="py-3">Assigned Professor</th>
-                                <th class="py-3">Branch</th>
-                                <th class="py-3">Status</th>
-                                <th class="py-3">Date Of Admit</th>
-                                <th class="py-3">Edit</th>
-                            </tr>
-                            </thead>
-                            <tbody id="customers">
-                            <tr class="btn-reveal-trigger">
-                                <td class="p-3">
-                                    <a href="javascript:void(0);">
-                                        <div class="media d-flex align-items-center">
-                                            <div class="avatar avatar-xl mr-2">
-                                                <img class="rounded-circle img-fluid" src="images/avatar/5.png" width="30" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Ricky Antony</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">Herman Beck</td>
-                                <td class="py-2">Mechanical</td>
-                                <td><span class="badge badge-rounded badge-primary">DONE</span></td>
-                                <td class="py-2">30/03/2018</td>
-                                <td>
-                                    <a href="edit-student.html" class="btn btn-sm btn-primary"><i class="la la-pencil"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="btn-reveal-trigger">
-                                <td class="p-3">
-                                    <a href="javascript:void(0);">
-                                        <div class="media d-flex align-items-center">
-                                            <div class="avatar avatar-xl mr-2">
-                                                <img class="rounded-circle img-fluid" src="images/avatar/1.png" alt="" width="30">
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Emma Watson</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">Emma Watson</td>
-                                <td class="py-2">Computer</td>
-                                <td><span class="badge badge-rounded badge-warning">Panding</span></td>
-                                <td class="py-2">11/07/2017</td>
-                                <td>
-                                    <a href="edit-student.html" class="btn btn-sm btn-primary"><i class="la la-pencil"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="btn-reveal-trigger">
-                                <td class="p-3">
-                                    <a href="javascript:void(0);">
-                                        <div class="media d-flex align-items-center">
-                                            <div class="avatar avatar-xl mr-2">
-                                                <img class="rounded-circle img-fluid" src="images/avatar/5.png" width="30" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Rowen Atkinson</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">Mary Adams</td>
-                                <td class="py-2">Mechanical</td>
-                                <td><span class="badge badge-rounded badge-primary">DONE</span></td>
-                                <td class="py-2">05/04/2016</td>
-                                <td>
-                                    <a href="edit-student.html" class="btn btn-sm btn-primary"><i class="la la-pencil"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="btn-reveal-trigger">
-                                <td class="p-3">
-                                    <a href="javascript:void(0);">
-                                        <div class="media d-flex align-items-center">
-                                            <div class="avatar avatar-xl mr-2">
-                                                <img class="rounded-circle img-fluid" src="images/avatar/1.png" alt="" width="30">
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Antony Hopkins</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">Caleb Richards </td>
-                                <td class="py-2">Computer </td>
-                                <td><span class="badge badge-rounded badge-danger">Suspended</span></td>
-                                <td class="py-2">05/04/2018</td>
-                                <td>
-                                    <a href="edit-student.html" class="btn btn-sm btn-primary"><i class="la la-pencil"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="btn-reveal-trigger">
-                                <td class="p-3">
-                                    <a href="javascript:void(0);">
-                                        <div class="media d-flex align-items-center">
-                                            <div class="avatar avatar-xl mr-2">
-                                                <img class="rounded-circle img-fluid" src="images/avatar/1.png" alt="" width="30">
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Jennifer Schramm</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">June Lane</td>
-                                <td class="py-2">Fees Collection</td>
-                                <td><span class="badge badge-rounded badge-warning">Panding</span></td>
-                                <td class="py-2">17/03/2016</td>
-                                <td>
-                                    <a href="edit-student.html" class="btn btn-sm btn-primary"><i class="la la-pencil"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="btn-reveal-trigger">
-                                <td class="p-3">
-                                    <a href="javascript:void(0);">
-                                        <div class="media d-flex align-items-center">
-                                            <div class="avatar avatar-xl mr-2">
-                                                <img class="rounded-circle img-fluid" src="images/avatar/5.png" width="30" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Raymond Mims</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">Herman Beck</td>
-                                <td class="py-2">Computer</td>
-                                <td><span class="badge badge-rounded badge-danger">Suspended</span></td>
-                                <td class="py-2">12/07/2014</td>
-                                <td>
-                                    <a href="edit-student.html" class="btn btn-sm btn-primary"><i class="la la-pencil"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="btn-reveal-trigger">
-                                <td class="p-3">
-                                    <a href="javascript:void(0);">
-                                        <div class="media d-flex align-items-center">
-                                            <div class="avatar avatar-xl mr-2">
-                                                <img class="rounded-circle img-fluid" src="images/avatar/1.png" alt="" width="30">
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Michael Jenkins</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">Jennifer Schramm</td>
-                                <td class="py-2">Mechanical</td>
-                                <td><span class="badge badge-rounded badge-warning">Panding</span></td>
-                                <td class="py-2">15/06/2014</td>
-                                <td>
-                                    <a href="edit-student.html" class="btn btn-sm btn-primary"><i class="la la-pencil"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="card-body text-center mt-4 p-0">
+                    <canvas id="reclamationsChart" style="height: 400px; width: 100%;"></canvas>
                 </div>
             </div>
         </div>
+
+        <script>
+            let width, height, gradient;
+
+            function getGradient(ctx, chartArea) {
+                const chartWidth = chartArea.right - chartArea.left;
+                const chartHeight = chartArea.bottom - chartArea.top;
+                if (!gradient || width !== chartWidth || height !== chartHeight) {
+                    width = chartWidth;
+                    height = chartHeight;
+                    gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                    gradient.addColorStop(0, 'rgba(54, 162, 235, 1)');
+                    gradient.addColorStop(0.5, 'rgba(255, 206, 86, 1)');
+                    gradient.addColorStop(1, 'rgba(255, 99, 132, 1)');
+                }
+
+                return gradient;
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const ctx = document.getElementById('reclamationsChart').getContext('2d');
+
+                const reclamationsChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [
+                            {% for date in students_per_day|keys %}
+                            '{{ date }}',
+                            {% endfor %}
+                        ],
+                        datasets: [{
+                            label: 'New Reclamations',
+                            data: [
+                                {{ students_per_day|join(', ') }}
+                            ],
+                            borderColor: function(context) {
+                                const chart = context.chart;
+                                const {ctx, chartArea} = chart;
+
+                                if (!chartArea) {
+                                    return;
+                                }
+                                return getGradient(ctx, chartArea);
+                            },
+                            fill: true,
+                            tension: 0.4,
+                            backgroundColor: function(context) {
+                                const chart = context.chart;
+                                const {ctx, chartArea} = chart;
+
+                                if (!chartArea) {
+                                    return;
+                                }
+                                return getGradient(ctx, chartArea);
+                            },
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: '#ffffff'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: '#ffffff'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
     </div>
+
 {% endblock %}

@@ -3,19 +3,22 @@
 namespace App\Controller;
 
 use App\Repository\StudentRepository;
+use App\Repository\ProfessorRepository;
+use App\Repository\ReclamationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\ProfessorRepository;
 
 class DashController extends AbstractController
 {
-
-
     #[Route('/dash', name: 'app_dash')]
-    public function dashboard(StudentRepository $studentRepository,ProfessorRepository $professorRepository, EntityManagerInterface $entityManager): Response
-    {
+    public function dashboard(
+        StudentRepository $studentRepository,
+        ProfessorRepository $professorRepository,
+        ReclamationRepository $reclamationRepository,
+        EntityManagerInterface $entityManager
+    ): Response {
         // Compter le nombre total d'étudiants
         $totalStudents = $studentRepository->count([]);
         $totalProfessors = $professorRepository->count([]);
@@ -39,7 +42,7 @@ class DashController extends AbstractController
         ";
         $stmt = $connection->prepare($sql);
         $stmt->bindValue('last_week', (new \DateTime('-7 days'))->format('Y-m-d'));
-        $result = $stmt->executeQuery(); // Utiliser executeQuery() pour obtenir un objet Result
+        $result = $stmt->executeQuery();
 
         // Utiliser fetchAllAssociative() sur l'objet Result pour obtenir les données
         $studentsPerDay = $result->fetchAllAssociative();
@@ -61,6 +64,9 @@ class DashController extends AbstractController
         // Convertir le tableau en une chaîne de valeurs pour Sparkline
         $studentsPerDayString = implode(',', $studentsPerDayData);
 
+        // Récupérer le nombre de réclamations créées au cours des 7 derniers jours
+        $newReclamationsCount = $reclamationRepository->countLast7DaysReclamations();
+
         // Passer les données à la vue
         return $this->render('dash/index.html.twig', [
             'total_students' => $totalStudents,
@@ -68,9 +74,10 @@ class DashController extends AbstractController
             'female_students' => $femaleStudents,
             'male_percentage' => $malePercentage,
             'female_percentage' => $femalePercentage,
-            'new_students' => array_sum($studentsPerDayData),  // Ajout du nombre total de nouveaux étudiants
-            'students_per_day' => $studentsPerDayString,       // Ajout des étudiants créés par jour
+            'new_students' => array_sum($studentsPerDayData),
+            'students_per_day' => $studentsPerDayString,
             'total_professors' => $totalProfessors,
+            'newReclamationsCount' => $newReclamationsCount, // Ajout de cette variable
         ]);
     }
 
@@ -79,7 +86,6 @@ class DashController extends AbstractController
     {
         return $this->render('user/user.html.twig');
     }
-
 
     #[Route('/listprofessors', name: 'app_list_professors')]
     public function listProfessors(): Response
@@ -178,5 +184,4 @@ class DashController extends AbstractController
             'students' => $studentRepository->findAll(),
         ]);
     }
-
 }

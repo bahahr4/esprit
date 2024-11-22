@@ -21,9 +21,11 @@ final class ReclamationController extends AbstractController
     public function index(ReclamationRepository $reclamationRepository): Response
     {
         $reclamations = $reclamationRepository->findAll();
+        $newReclamationsCount = $reclamationRepository->countLast7DaysReclamations();
 
         return $this->render('reclamation/index.html.twig', [
             'reclamations' => $reclamations,
+            'newReclamationsCount' => $newReclamationsCount,
         ]);
     }
 
@@ -36,7 +38,7 @@ final class ReclamationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // The date is automatically set in the entity constructor
+            // La date est déjà initialisée via le constructeur
             $entityManager->persist($reclamation);
             $entityManager->flush();
 
@@ -48,6 +50,7 @@ final class ReclamationController extends AbstractController
             'form' => $form,
         ]);
     }
+
 
     // Route pour afficher une réclamation spécifique
     #[Route('/{id}', name: 'app_reclamation_show', methods: ['GET'])]

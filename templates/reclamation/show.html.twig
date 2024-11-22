@@ -7,28 +7,27 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ reclamation.id }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ reclamation.type }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ reclamation.description }}</td>
-            </tr>
-            <tr>
-                <th>Datereclamation</th>
-                <td>{{ reclamation.datereclamation ? reclamation.datereclamation|date('Y-m-d') : '' }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ reclamation.id }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ reclamation.type }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ reclamation.description }}</td>
+        </tr>
+        <tr>
+            <th>Date Reclamation</th>
+            <td>{{ reclamation.daterecl ? reclamation.daterecl|date('Y-m-d') : 'N/A' }}</td> <!-- Correction ici -->
+        </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_reclamation_index') }}">back to list</a>
-
-    <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}">edit</a>
+    <a href="{{ path('app_reclamation_index') }}" class="btn btn-secondary">Back to list</a>
+    <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}" class="btn btn-primary">Edit</a>
 
     {{ include('reclamation/_delete_form.html.twig') }}
 {% endblock %}
