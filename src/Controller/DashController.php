@@ -20,64 +20,63 @@ class DashController extends AbstractController
         EntityManagerInterface $entityManager
     ): Response {
         // Compter le nombre total d'étudiants
-        $totalStudents = $studentRepository->count([]);
-        $totalProfessors = $professorRepository->count([]);
+       // $totalStudents = $studentRepository->count([]);
+      //  $totalProfessors = $professorRepository->count([]);
 
         // Compter le nombre d'étudiants masculins et féminins
-        $maleStudents = $studentRepository->count(['gender' => 'Male']);
-        $femaleStudents = $studentRepository->count(['gender' => 'Female']);
+      //  $maleStudents = $studentRepository->count(['gender' => 'Male']);
+      //  $femaleStudents = $studentRepository->count(['gender' => 'Female']);
 
         // Calculer les pourcentages
-        $malePercentage = ($totalStudents > 0) ? ($maleStudents / $totalStudents) * 100 : 0;
-        $femalePercentage = ($totalStudents > 0) ? ($femaleStudents / $totalStudents) * 100 : 0;
+      //  $malePercentage = ($totalStudents > 0) ? ($maleStudents / $totalStudents) * 100 : 0;
+      //  $femalePercentage = ($totalStudents > 0) ? ($femaleStudents / $totalStudents) * 100 : 0;
 
         // Obtenir le nombre de nouveaux étudiants ajoutés chaque jour au cours des 7 derniers jours
-        $connection = $entityManager->getConnection();
-        $sql = "
-            SELECT DATE(datecreation) AS creation_date, COUNT(*) AS student_count
-            FROM student
-            WHERE datecreation >= :last_week
-            GROUP BY creation_date
-            ORDER BY creation_date ASC
-        ";
-        $stmt = $connection->prepare($sql);
-        $stmt->bindValue('last_week', (new \DateTime('-7 days'))->format('Y-m-d'));
-        $result = $stmt->executeQuery();
+       // $connection = $entityManager->getConnection();
+       // $sql = "
+       //     SELECT DATE(datecreation) AS creation_date, COUNT(*) AS student_count
+      //      FROM user
+       //     WHERE datecreation >= :last_week
+       //     GROUP BY creation_date
+       //     ORDER BY creation_date ASC
+      //  ";
+      //  $stmt = $connection->prepare($sql);
+       // $stmt->bindValue('last_week', (new \DateTime('-7 days'))->format('Y-m-d'));
+       // $result = $stmt->executeQuery();
 
         // Utiliser fetchAllAssociative() sur l'objet Result pour obtenir les données
-        $studentsPerDay = $result->fetchAllAssociative();
+       // $studentsPerDay = $result->fetchAllAssociative();
 
         // Préparer un tableau des étudiants créés chaque jour
-        $studentsPerDayData = [];
-        for ($i = 6; $i >= 0; $i--) {
-            $date = (new \DateTime('-' . $i . ' days'))->format('Y-m-d');
-            $studentsPerDayData[$date] = 0;
-        }
+        //$studentsPerDayData = [];
+       // for ($i = 6; $i >= 0; $i--) {
+      //     $date = (new \DateTime('-' . $i . ' days'))->format('Y-m-d');
+       //     $studentsPerDayData[$date] = 0;
+      //  }
 
-        foreach ($studentsPerDay as $data) {
-            $date = $data['creation_date'];
-            if (isset($studentsPerDayData[$date])) {
-                $studentsPerDayData[$date] = (int)$data['student_count'];
-            }
-        }
+       // foreach ($studentsPerDay as $data) {
+       //     $date = $data['creation_date'];
+       //     if (isset($studentsPerDayData[$date])) {
+      //          $studentsPerDayData[$date] = (int)$data['student_count'];
+      //      }
+      //  }
 
         // Convertir le tableau en une chaîne de valeurs pour Sparkline
-        $studentsPerDayString = implode(',', $studentsPerDayData);
+       // $studentsPerDayString = implode(',', $studentsPerDayData);
 
         // Récupérer le nombre de réclamations créées au cours des 7 derniers jours
-        $newReclamationsCount = $reclamationRepository->countLast7DaysReclamations();
+      //  $newReclamationsCount = $reclamationRepository->countLast7DaysReclamations();
 
         // Passer les données à la vue
         return $this->render('dash/index.html.twig', [
-            'total_students' => $totalStudents,
-            'male_students' => $maleStudents,
-            'female_students' => $femaleStudents,
-            'male_percentage' => $malePercentage,
-            'female_percentage' => $femalePercentage,
-            'new_students' => array_sum($studentsPerDayData),
-            'students_per_day' => $studentsPerDayString,
-            'total_professors' => $totalProfessors,
-            'newReclamationsCount' => $newReclamationsCount, // Ajout de cette variable
+      //      'total_students' => $totalStudents,
+       //     'male_students' => $maleStudents,
+       //     'female_students' => $femaleStudents,
+       //     'male_percentage' => $malePercentage,
+      //      'female_percentage' => $femalePercentage,
+        //    'new_students' => array_sum($studentsPerDayData),
+       //     'students_per_day' => $studentsPerDayString,
+       ////    'newReclamationsCount' => $newReclamationsCount, // Ajout de cette variable
         ]);
     }
 
