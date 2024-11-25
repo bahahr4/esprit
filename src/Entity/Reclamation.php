@@ -25,11 +25,11 @@ class Reclamation
     )]
     private ?string $type = null;
 
-    #[ORM\Column(length: 500)]
+    #[ORM\Column(length: 255 ,nullable: true)]
     #[Assert\NotBlank(message: "La description ne peut pas être vide.")]
     #[Assert\Length(
         min: 10,
-        max: 500,
+        max: 255,
         minMessage: "La description doit contenir au moins {{ limit }} caractères.",
         maxMessage: "La description ne peut pas dépasser {{ limit }} caractères."
     )]
