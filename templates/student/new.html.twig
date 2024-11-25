@@ -32,9 +32,14 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            {{ form_label(form.adress, 'Address', {'label_attr': {'class': 'form-label'}}) }}
-                            {{ form_widget(form.adress, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.adress) }}
+                            {{ form_label(form.address, 'Address', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.address) }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ form_label(form.password, 'password', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.password) }}
                         </div>
 
                         {# Ajout du champ 'gender' #}

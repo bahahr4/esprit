@@ -35,9 +35,16 @@ class StudentType extends AbstractType
                     'class' => 'form-control',
                 ],
             ])
-            ->add('adress', TextType::class, [
+            ->add('address', TextType::class, [
                 'label' => 'Address',
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('password', TextType::class, [
+                'label' => 'password',
+                'required' => true,
                 'attr' => [
                     'class' => 'form-control',
                 ],

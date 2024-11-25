@@ -2,100 +2,40 @@
 
 namespace App\Entity;
 
-use App\Repository\StudentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: StudentRepository::class)]
-class Student
+#[ORM\Entity]
+class Student extends User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
-
     #[ORM\Column(nullable: true)]
-    private ?int $PhoneNumber = null;
+    private ?int $phoneNumber = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $adress = null;
+    private ?string $address = null;
 
-    #[ORM\Column(length: 10)] // Nouveau champ
+    #[ORM\Column(length: 10)]
     private string $gender;
-
-    #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeInterface $createdAt = null;
-
-    #[ORM\Column(type: 'date')]
-    private ?\DateTimeInterface $datecreation = null;
-
-    public function __construct()
-    {
-        $this->createdAt = new \DateTime(); // Initialise la date actuelle à la création
-        $this->datecreation = new \DateTime(); // Initialise la date actuelle pour la création du compte
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
-
-        return $this;
-    }
 
     public function getPhoneNumber(): ?int
     {
-        return $this->PhoneNumber;
+        return $this->phoneNumber;
     }
 
-    public function setPhoneNumber(?int $PhoneNumber): static
+    public function setPhoneNumber(?int $phoneNumber): static
     {
-        $this->PhoneNumber = $PhoneNumber;
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }
 
-    public function getAdress(): ?string
+    public function getAddress(): ?string
     {
-        return $this->adress;
+        return $this->address;
     }
 
-    public function setAdress(?string $adress): static
+    public function setAddress(?string $address): static
     {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
-    public function setId(string $id): static
-    {
-        $this->id = $id;
+        $this->address = $address;
 
         return $this;
     }
@@ -111,29 +51,4 @@ class Student
 
         return $this;
     }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getDatecreation(): ?\DateTimeInterface
-    {
-        return $this->datecreation;
-    }
-
-    public function setDatecreation(\DateTimeInterface $datecreation): static
-    {
-        $this->datecreation = $datecreation;
-
-        return $this;
-    }
-
 }

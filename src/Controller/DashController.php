@@ -81,7 +81,7 @@ class DashController extends AbstractController
         ]);
     }
 
-    #[Route('/user', name: 'app_user')]
+    #[Route('/', name: 'app_user')]
     public function user(): Response
     {
         return $this->render('user/user.html.twig');

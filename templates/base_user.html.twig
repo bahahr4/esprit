@@ -35,28 +35,47 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="" class="logo"> <!-- Replace 'homepage' with your actual route name -->
-                        <img class="logo-compact" src="{{ asset('images/espritlogo.png') }}" alt="" style="width: 200px; height: auto; position: relative; top: -25px;">
+                    <a href="{{ path('app_user') }}" class="logo">
+                        <img class="logo-compact" src="{{ asset('images/espritlogo.png') }}" alt="Logo" style="width: 200px; height: auto; position: relative; top: -25px;">
                     </a>
                     <!-- ***** Logo End ***** -->
+
+                    <!-- ***** Menu Trigger (Mobile) ***** -->
+                    <a class="menu-trigger">
+                        <span>Menu</span>
+                    </a>
+
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                        <li><a href="meetings.html">Meetings</a></li> <!-- Replace 'meetings' with the correct route name -->
+                        <li><a href="">Meetings</a></li>
                         <li class="scroll-to-section"><a href="#apply">Apply Now</a></li>
+
                         <li class="has-sub">
                             <a href="javascript:void(0)">Pages</a>
                             <ul class="sub-menu">
-                                <li><a href="">Upcoming Meetings</a></li> <!-- Replace 'meetings' with the correct route -->
-                                <li><a href="">Meeting Details</a></li> <!-- Replace 'meeting_details' with the correct route -->
+                                <li><a href="">Upcoming Meetings</a></li>
+                                <li><a href="">Meeting Details</a></li>
                             </ul>
                         </li>
+
                         <li class="scroll-to-section"><a href="#courses">Courses</a></li>
                         <li class="scroll-to-section"><a href="#contact">Contact Us</a></li>
+
+                        {% if not app.user %}
+                            <li class="scroll-to-section"><a href="{{ path('app_login') }}">Login</a></li>
+                            <li class="scroll-to-section"><a href="{{ path('registration') }}">Sign Up</a></li>
+                        {% else %}
+                            <li class="scroll-to-section"><a href="javascript:void(0)">{{ app.user.getName() }}</a></li>
+                            <li class="scroll-to-section">
+                                <a href="{{ path('app_logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
+                            </li>
+                            <form id="logout-form" action="{{ path('app_logout') }}" method="POST" style="display: none;">
+                            </form>
+
+
+                        {% endif %}
                     </ul>
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
                     <!-- ***** Menu End ***** -->
                 </nav>
             </div>
