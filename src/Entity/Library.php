@@ -58,12 +58,12 @@ class Library
         return $this;
     }
 
-    public function getbloc(): ?string
+    public function getBloc(): ?string
     {
         return $this->bloc;
     }
 
-    public function setbloc(string $bloc): self
+    public function setBloc(string $bloc): self
     {
         $this->bloc = $bloc;
 
