@@ -18,7 +18,7 @@ class Library
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $location = null;
+    private ?string $bloc = null;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $description = null;
@@ -58,14 +58,14 @@ class Library
         return $this;
     }
 
-    public function getLocation(): ?string
+    public function getbloc(): ?string
     {
-        return $this->location;
+        return $this->bloc;
     }
 
-    public function setLocation(string $location): self
+    public function setbloc(string $bloc): self
     {
-        $this->location = $location;
+        $this->bloc = $bloc;
 
         return $this;
     }

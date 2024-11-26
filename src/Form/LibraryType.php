@@ -13,7 +13,7 @@ class LibraryType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('location')
+            ->add('bloc')
             ->add('description')
             ->add('contact')
             ->add('openingHours')
