@@ -1,0 +1,52 @@
+{% extends 'base_user.html.twig' %}
+
+{% block title %}Reclamation Details{% endblock %}
+
+{% block body %}
+    <!-- Heading Section -->
+    <section class="heading-page header-text" id="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h6>Reclamation Details</h6>
+                    <h2>Reclamation Information</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reclamation Detail Section -->
+    <section class="meetings-page" id="meetings">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bg-white p-4 shadow-sm rounded">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ reply.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Objet</th>
+                                <td>{{ reply.objet }}</td>
+                            </tr>
+                            <tr>
+                                <th>Content</th>
+                                <td>{{ reply.content }}</td>
+                            </tr>
+                            <tr>
+                                <th>replyed date</th>
+                                <td>{{ reply.createdate ? reply.createdate|date('Y-m-d H:i:s') : '' }}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+{% endblock %}
+
+
