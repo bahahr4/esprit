@@ -67,12 +67,20 @@
                             </li>
                             <li class="scroll-to-section"><a href="{{ path('registration') }}"   > Sign Up </a></li>
                         {% else %}
-                            <li class="scroll-to-section"><a href="javascript:void(0)">{{ app.user.getName() }}</a></li>
-                            <li class="scroll-to-section">
-                                <a href="{{ path('app_logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
+                            <li class="has-sub">
+                                <a href="">{{ app.user.getName() }}</a>
+                                <ul class="sub-menu">
+                                    <li><a href="">Profile</a></li>
+                                    <li><a href="{{ path('app_reclamation_user') }}">Reclamation</a></li>
+                                    <li class="scroll-to-section">
+                                        <a href="{{ path('app_logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
+                                    </li>
+                                    <form id="logout-form" action="{{ path('app_logout') }}" method="POST" style="display: none;">
+                                    </form>
+
+
+                                </ul>
                             </li>
-                            <form id="logout-form" action="{{ path('app_logout') }}" method="POST" style="display: none;">
-                            </form>
 
 
                         {% endif %}

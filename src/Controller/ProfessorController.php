@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/professor')]
-final class ProfessorController extends AbstractController
+ class ProfessorController extends AbstractController
 {
     #[Route(name: 'app_professor_index', methods: ['GET'])]
     public function index(ProfessorRepository $professorRepository): Response
