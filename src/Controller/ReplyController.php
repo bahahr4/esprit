@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Reclamation;
 use App\Entity\Reply;
 use App\Form\ReplyType;
 use App\Repository\ReplyRepository;
@@ -22,23 +23,32 @@ final class ReplyController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_reply_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/reclamation/{id}/reply/new', name: 'app_reply_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, Reclamation $reclamation): Response
     {
+        // Create a new Reply object
         $reply = new Reply();
+
+        // Associate the reply with the selected reclamation
+        $reply->setReclamation($reclamation);
+        $reply->setCreatedate(new \DateTime());
+        // Create the form
         $form = $this->createForm(ReplyType::class, $reply);
         $form->handleRequest($request);
 
+        // If the form is submitted and valid, persist the reply
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($reply);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_reply_index', [], Response::HTTP_SEE_OTHER);
+            // Redirect to the reclamation show page
+            return $this->redirectToRoute('app_reclamation_index');
         }
 
+        // Render the form to reply
         return $this->render('reply/new.html.twig', [
-            'reply' => $reply,
-            'form' => $form,
+            'form' => $form->createView(),
+            'reclamation' => $reclamation,
         ]);
     }
 
@@ -52,7 +62,7 @@ final class ReplyController extends AbstractController
     #[Route('user/{id}', name: 'app_reply_show_user', methods: ['GET'])]
     public function shogw(Reply $reply): Response
     {
-        return $this->render('reclamation/show.html.twig', [
+        return $this->render('reclamation/showreply.html.twig', [
             'reply' => $reply,
         ]);
     }

@@ -24,6 +24,9 @@ class Reclamation
         maxMessage: "Le type de réclamation ne peut pas dépasser {{ limit }} caractères."
     )]
     private ?string $type = null;
+    #[ORM\Column(length: 255)]
+
+    private ?string $email = null;
 
     #[ORM\Column(length: 500)]
     #[Assert\NotBlank(message: "La description ne peut pas être vide.")]
@@ -34,6 +37,16 @@ class Reclamation
         maxMessage: "La description ne peut pas dépasser {{ limit }} caractères."
     )]
     private ?string $description = null;
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): void
+    {
+        $this->email = $email;
+    }
 
     #[ORM\OneToMany(targetEntity: Reply::class, mappedBy: 'reclamation', cascade: ['persist', 'remove'])]
     private Collection $replies;

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Reclamation;
+use App\Entity\Reply;
 use App\Form\ReclamationType;
 use App\Repository\ReclamationRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,14 +14,22 @@ use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/reclamation')]
 final class ReclamationController extends AbstractController
+{#[Route('/', name: 'app_reclamation_index', methods: ['GET'])]
+public function index(EntityManagerInterface $entityManager): Response
 {
-    #[Route(name: 'app_reclamation_index', methods: ['GET'])]
-    public function index(ReclamationRepository $reclamationRepository): Response
-    {
-        return $this->render('reclamation/index.html.twig', [
-            'reclamations' => $reclamationRepository->findAll(),
-        ]);
+    // Fetch all reclamations
+    $reclamations = $entityManager->getRepository(Reclamation::class)->findAll();
+
+    // Optionally, fetch the replies for each reclamation to check if a reply exists
+    foreach ($reclamations as $reclamation) {
+        $reclamation->hasReply = $entityManager->getRepository(Reply::class)
+            ->findOneBy(['reclamation' => $reclamation]);
     }
+
+    return $this->render('reclamation/index.html.twig', [
+        'reclamations' => $reclamations,
+    ]);
+}
     #[Route('reclamation_user',name: 'app_reclamation_user', methods: ['GET'])]
     public function indeex(ReclamationRepository $reclamationRepository): Response
     {

@@ -1,0 +1,41 @@
+{% extends 'base_user.html.twig' %}
+
+{% block title %}ReservationCellule index{% endblock %}
+
+{% block body %}
+    <h1>ReservationCellule index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Reason</th>
+                <th>CreatedAt</th>
+                <th>ReservedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation_cellule in reservation_cellules %}
+            <tr>
+                <td>{{ reservation_cellule.id }}</td>
+                <td>{{ reservation_cellule.type }}</td>
+                <td>{{ reservation_cellule.reason }}</td>
+                <td>{{ reservation_cellule.createdAt ? reservation_cellule.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reservation_cellule.reservedAt ? reservation_cellule.reservedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_reservation_cellule_show', {'id': reservation_cellule.id}) }}">show</a>
+                    <a href="{{ path('app_reservation_cellule_edit', {'id': reservation_cellule.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservation_cellule_new') }}">Create new</a>
+{% endblock %}

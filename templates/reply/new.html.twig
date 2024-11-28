@@ -1,11 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Reply{% endblock %}
+{% block title %}Reply to Reclamation{% endblock %}
 
-{% block body %}
-    <h1>Create new Reply</h1>
+{% block content %}
+    <h1>Reply to Reclamation</h1>
 
-    {{ include('reply/_form.html.twig') }}
+    {{ form_start(form) }}
 
-    <a href="{{ path('app_reply_index') }}">back to list</a>
+    <div class="form-group">
+        {{ form_label(form.objet) }}
+        {{ form_widget(form.objet, {'attr': {'class': 'form-control', 'placeholder': 'Enter subject here'}}) }}
+        {# Display errors for 'objet' field if any #}
+        {% if form.objet.vars.errors|length > 0 %}
+            <div style="color: red">
+                {{ form_errors(form.objet) }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.content) }}
+        {{ form_widget(form.content, {'attr': {'class': 'form-control', 'placeholder': 'Write your reply here...', 'rows': '4'}}) }}
+        {# Display errors for 'content' field if any #}
+        {% if form.content.vars.errors|length > 0 %}
+            <div style="color: red">
+                {{ form_errors(form.content) }}
+            </div>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Reply</button>
+
+    {{ form_end(form) }}
 {% endblock %}

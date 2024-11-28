@@ -1,41 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reclamation index{% endblock %}
+{% block title %}Reclamation Index{% endblock %}
 
 {% block content %}
-    <h1>Reclamation index</h1>
+    <h1 class="my-4">Reclamation Index</h1>
 
-    <table class="table">
-        <thead>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
             <tr>
                 <th>Id</th>
                 <th>Type</th>
                 <th>Description</th>
-                <th>Daterecl</th>
+                <th>Date Reclamation</th>
                 <th>Email</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for reclamation in reclamations %}
-            <tr>
-                <td>{{ reclamation.id }}</td>
-                <td>{{ reclamation.type }}</td>
-                <td>{{ reclamation.description }}</td>
-                <td>{{ reclamation.daterecl ? reclamation.daterecl|date('Y-m-d') : '' }}</td>
-                <td>{{ reclamation.email }}</td>
-                <td>
-                    <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}">show</a>
-                    <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}">reply</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for reclamation in reclamations %}
+                <tr>
+                    <td>{{ reclamation.id }}</td>
+                    <td>{{ reclamation.type }}</td>
+                    <td>{{ reclamation.description }}</td>
+                    <td>{{ reclamation.daterecl ? reclamation.daterecl|date('Y-m-d') : '' }}</td>
+                    <td>{{ reclamation.email }}</td>
+                    <td>
+                        <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}" class="btn btn-info btn-sm">Show</a>
+                        {% if reclamation.hasReply %}
+                            <span class="btn btn-secondary btn-sm" disabled>Replied</span>
+                        {% else %}
+                            <a href="{{ path('app_reply_new', {'id': reclamation.id}) }}" class="btn btn-primary btn-sm">Reply</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-    <a href="{{ path('app_reclamation_new') }}">Create new</a>
 {% endblock %}

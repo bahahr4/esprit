@@ -1,52 +1,36 @@
-{% extends 'base_user.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Reclamation Details{% endblock %}
 
-{% block body %}
-    <!-- Heading Section -->
-    <section class="heading-page header-text" id="top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h6>Reclamation Details</h6>
-                    <h2>Reclamation Information</h2>
-                </div>
-            </div>
-        </div>
-    </section>
+{% block content %}
+    <h1>Reclamation Details</h1>
 
-    <!-- Reclamation Detail Section -->
-    <section class="meetings-page" id="meetings">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="bg-white p-4 shadow-sm rounded">
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>Id</th>
-                                <td>{{ reply.id }}</td>
-                            </tr>
-                            <tr>
-                                <th>Objet</th>
-                                <td>{{ reply.objet }}</td>
-                            </tr>
-                            <tr>
-                                <th>Content</th>
-                                <td>{{ reply.content }}</td>
-                            </tr>
-                            <tr>
-                                <th>replyed date</th>
-                                <td>{{ reply.createdate ? reply.createdate|date('Y-m-d H:i:s') : '' }}</td>
-                            </tr>
-                        </table>
+    <h2>{{ reclamation.type }}</h2>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <p><strong>ID:</strong> {{ reclamation.id }}</p>
+    <p><strong>Type:</strong> {{ reclamation.type }}</p>
+    <p><strong>Description:</strong> {{ reclamation.description }}</p>
+    <p><strong>Date of Reclamation:</strong> {{ reclamation.daterecl ? reclamation.daterecl|date('Y-m-d') : 'No date provided' }}</p>
+    <p><strong>Email:</strong> {{ reclamation.email }}</p>
 
-    <!-- Footer Section -->
+    <h3>Replies:</h3>
+    {% if reclamation.replies is not empty %}
+        <ul>
+            {% for reply in reclamation.replies %}
+                <li>
+                    <strong>{{ reply.objet }}</strong>
+                    <p>{{ reply.content }}</p>
+                    <small>Posted on: {{ reply.createdate|date('Y-m-d H:i') }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No replies yet for this reclamation.</p>
+
+        <a href="{{ path('app_reply_new', {'id': reclamation.id}) }}">Reply to this Reclamation</a><br><br>
+
+    {% endif %}
+
+
+    <a href="{{ path('app_reclamation_index') }}">Back to Reclamation List</a>
 {% endblock %}
-
-

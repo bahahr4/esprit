@@ -14,42 +14,45 @@
                         {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
 
                         <div class="form-group mb-3">
-                            {{ form_label(form.name, 'Name', {'label_attr': {'class': 'form-label'}}) }}
-                            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.name) }}
+                            {{ form_label(form.type, 'Reservation Type', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.type, {'attr': {'class': 'form-control', 'placeholder': 'Select Reservation Type'}}) }}
+                            {{ form_errors(form.type) }}
                         </div>
 
                         <div class="form-group mb-3">
-                            {{ form_label(form.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
-                            {{ form_widget(form.email, {
-                            'attr': {
-                            'class': 'form-control',
-                            'placeholder': 'Enter your email address'
-                            }
-                            }) }}
-                            {% if form.email.vars.errors|length > 0 %}
+                            {{ form_label(form.reason, 'Reason for Reservation', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.reason, {'attr': {'class': 'form-control', 'placeholder': 'Reason for reservation'}}) }}
+                            {% if form.reason.vars.errors|length > 0 %}
                                 <div class="text-danger mt-1">
-                                    {% for error in form.email.vars.errors %}
+                                    {% for error in form.reason.vars.errors %}
                                         {{ error.message }}
                                     {% endfor %}
                                 </div>
                             {% endif %}
                         </div>
 
+                        <div class="form-group mb-3">
+                            {{ form_label(form.reservedAt, 'Reserved Date', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.reservedAt, {'attr': {'class': 'form-control', 'placeholder': 'Select a reserved date'}}) }}
+                            {% if form.reservedAt.vars.errors|length > 0 %}
+                                <div class="text-danger mt-1">
+                                    {% for error in form.reservedAt.vars.errors %}
+                                        {{ error.message }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
 
                         <div class="form-group mb-3">
-                            {{ form_label(form.PhoneNumberProf, 'Phone Number', {'label_attr': {'class': 'form-label'}}) }}
-                            {{ form_widget(form.PhoneNumberProf, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.PhoneNumberProf) }}
+                            {{ form_label(form.createdAt, 'Creation Date', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.createdAt, {'attr': {'class': 'form-control', 'placeholder': 'Creation date (auto-generated)'}}) }}
+                            {{ form_errors(form.createdAt) }}
                         </div>
-                        <div class="form-group mb-3">
-                            {{ form_label(form.password, 'Password', {'label_attr': {'class': 'form-label'}}) }}
-                            {{ form_widget(form.password, {'attr': {'class': 'form-control', 'type': 'password'}}) }}
-                            {{ form_errors(form.password) }}
-                        </div>
-                        <button type="submit" class="btn btn-success w-100">Save</button>
+
+                        <button type="submit" class="btn btn-success w-100">Submit Reservation</button>
 
                         {{ form_end(form) }}
+
                     </div>
                 </div>
 
@@ -58,5 +61,6 @@
     </div>
 
     {{ form_end(form) }}
+
 
 {% endblock %}
