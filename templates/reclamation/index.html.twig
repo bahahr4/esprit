@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reclamations{% endblock %}
+
+{% block content %}
+
+    <div class="row page-titles mx-0">
+        <div class="col-sm-6 p-md-0">
+            <div class="welcome-text">
+                <h4>Hi, welcome back!</h4>
+                <span class="ml-1">Reclamations</span>
+            </div>
+        </div>
+        <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Reclamations</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="email-left-box px-0 mb-5">
+                        <div class="mail-list mt-4">
+                            <a href="{{ path('app_reclamation_index') }}" class="list-group-item active">
+                                <i class="fa fa-inbox font-18 align-middle mr-2"></i> Reclamations <span class="badge badge-primary badge-sm float-right">{{ reclamations|length }}</span>
+                            </a>
+                        </div>
+                        <div class="mail-list mt-4">
+                            <a href="#" class="list-group-item" style="background-color: #28a745; color: white;">
+                                <i class="fa fa-reply font-18 align-middle mr-2"></i> Replies
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="email-right-box ml-0 ml-sm-4 ml-sm-0">
+                        <div role="toolbar" class="toolbar ml-4 ml-sm-0">
+                            <div class="btn-group mb-4">
+                                <button class="btn btn-dark" type="button"><i class="ti-reload"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="email-list mt-4">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                        <th>Date Reclamation</th> <!-- Ajout de la colonne 'Date Reclamation' -->
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for reclamation in reclamations %}
+                                        <tr>
+                                            <td>{{ reclamation.id }}</td>
+                                            <td>{{ reclamation.type }}</td>
+                                            <td>{{ reclamation.description }}</td>
+                                            <td>{{ reclamation.daterecl ? reclamation.daterecl|date('Y-m-d') : 'N/A' }}</td> <!-- Affichage de la date -->
+                                            <td>
+                                                <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}" class="btn btn-info btn-sm"><i class="la la-eye"></i> Show</a>
+                                                <a href="{{ path('app_reply_new', {'id': reclamation.id}) }}" class="btn btn-success btn-sm"><i class="la la-reply"></i> Reply</a>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="5" class="text-center">No records found</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- panel for pagination or actions -->
+                        <div class="row mt-4 m-4 mx-sm-4">
+                            <div class="col-7">
+                                <div class="text-left">1 - {{ reclamations|length }} of {{ reclamations|length }}</div>
+                            </div>
+                            <div class="col-5">
+                                <div class="btn-group float-right">
+                                    <button class="btn btn-dark" type="button"><i class="fa fa-angle-left"></i></button>
+                                    <button class="btn btn-dark" type="button"><i class="fa fa-angle-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

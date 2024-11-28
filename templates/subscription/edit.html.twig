@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Subscription{% endblock %}
+
+{% block content %}
+    <div class="row page-titles mx-0">
+        <div class="col-sm-6 p-md-0">
+            <div class="welcome-text">
+                <h4>Modifier l'abonnement</h4>
+            </div>
+        </div>
+        <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_subscription_index') }}">Abonnements</a></li>
+                <li class="breadcrumb-item active"><a href="#">Modifier</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Modifier un abonnement</h4>
+        </div>
+        <div class="card-body">
+            {{ include('subscription/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+            <a href="{{ path('app_subscription_index') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+
+            {{ include('subscription/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

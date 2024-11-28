@@ -1,0 +1,81 @@
+{% extends 'base_user.html.twig' %}
+
+{% block title %}New Entretien{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Create New Entretien</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.First_name, 'First Name', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.First_name, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.First_name) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.Last_name, 'Last Name', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.Last_name, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.Last_name) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.Email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.Email, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.Email) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.CIN, 'CIN', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.CIN, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.CIN) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.Phone, 'Phone', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.Phone, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.Phone) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.French_proficiency, 'French Proficiency', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.French_proficiency, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.French_proficiency) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.English_proficiency, 'English Proficiency', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.English_proficiency, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.English_proficiency) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.Previous_school, 'Previous School', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.Previous_school, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.Previous_school) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.Specialization, 'Specialization', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.Specialization, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.Specialization) }}
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">Save</button>
+
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="{{ path('app_entretien_index') }}" class="btn btn-secondary">Back to list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

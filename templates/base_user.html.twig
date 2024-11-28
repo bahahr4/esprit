@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="TemplateMo">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <title>Education Meeting HTML5 Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('vendor2/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{{ asset('/css1/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css1/templatemo-edu-meeting.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css1/owl.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css1/lightbox.css') }}">
+
+</head>
+
+
+<body>
+
+<!-- Sub Header -->
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="{{ path('app_user') }}" class="logo">
+                        <img class="logo-compact" src="{{ asset('images/espritlogo.png') }}" alt="Logo" style="width: 200px; height: auto; position: relative; top: -25px;">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+
+                    <!-- ***** Menu Trigger (Mobile) ***** -->
+                    <a class="menu-trigger">
+                        <span>Menu</span>
+                    </a>
+
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+                        <li><a href="">Meetings</a></li>
+                        <li class="scroll-to-section"><a href="#apply">Apply Now</a></li>
+
+                        <li class="has-sub">
+                            <a href="">Pages</a>
+                            <ul class="sub-menu">
+                                <li><a href="">Upcoming Meetings</a></li>
+                                <li><a href="">Meeting Details</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="scroll-to-section"><a href="#courses">Courses</a></li>
+                        <li class="scroll-to-section"><a href="{{ path('app_subscription_new') }}">Subscription</a></li>
+                        <li class="scroll-to-section"><a href="#contact">Contact Us</a></li>
+                        <li class="scroll-to-section"><a href="{{ path('app_entretien_new') }}">Interview</a></li>
+
+                        {% if not app.user %}
+                            <li class="scroll-to-section"><a href="{{ path('app_login') }}">Login</a>
+                            </li>
+                            <li class="scroll-to-section"><a href="{{ path('registration') }}"   > Sign Up </a></li>
+                        {% else %}
+                            <li class="scroll-to-section"><a href="javascript:void(0)">{{ app.user.getName() }}</a></li>
+                            <li class="scroll-to-section">
+                                <a href="{{ path('app_logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
+                            </li>
+                            <form id="logout-form" action="{{ path('app_logout') }}" method="POST" style="display: none;">
+                            </form>
+
+
+                        {% endif %}
+                    </ul>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ***** Header Area End ***** -->
+{% block body %}
+{% endblock %}
+
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="{{ asset('vendor2/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('vendor2/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<script src="{{ asset('/js1/isotope.min.js') }}"></script>
+<script src="{{ asset('/js1/owl-carousel.js') }}"></script>
+<script src="{{ asset('/js1/lightbox.js') }}"></script>
+<script src="{{ asset('/js1/tabs.js') }}"></script>
+<script src="{{ asset('/js1/video.js') }}"></script>
+<script src="{{ asset('/js1/slick-slider.js') }}"></script>
+<script src="{{ asset('/js1/custom.js') }}"></script>
+
+
+
+</body>
+
+
+</html>

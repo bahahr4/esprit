@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entretiens{% endblock %}
+
+{% block content %}
+
+    <div class="row page-titles mx-0">
+        <div class="col-sm-6 p-md-0">
+            <div class="welcome-text">
+                <h4>Liste des entretiens</h4>
+            </div>
+        </div>
+        <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                <li class="breadcrumb-item active"><a href="#">Entretiens</a></li>
+                <li class="breadcrumb-item active"><a href="#">Liste</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Tous les entretiens</h4>
+                    <a href="{{ path('app_entretien_new') }}" class="btn btn-primary">+ Ajouter un entretien</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example3" class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Email</th>
+                                <th>CIN</th>
+                                <th>Phone</th>
+                                <th>French</th>
+                                <th>English</th>
+                                <th>previousSchool</th>
+                                <th>specialization</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for entretien in entretiens %}
+                                <tr>
+                                    <td>{{ entretien.id }}</td>
+                                    <td>{{ entretien.firstName }}</td>
+                                    <td>{{ entretien.lastName }}</td>
+                                    <td>{{ entretien.email }}</td>
+                                    <td>{{ entretien.cin }}</td>
+                                    <td>{{ entretien.phone }}</td>
+                                    <td>{{ entretien.frenchProficiency }}</td>
+                                    <td>{{ entretien.englishProficiency }}</td>
+                                    <td>{{ entretien.previousSchool }}</td>
+                                    <td>{{ entretien.specialization }}</td>
+                                    <td>
+                                        <a href="{{ path('app_entretien_show', {'id': entretien.id}) }}" class="btn btn-sm btn-info"><i class="la la-eye"></i></a>
+                                        <a href="{{ path('app_entretien_edit', {'id': entretien.id}) }}" class="btn btn-sm btn-primary"><i class="la la-pencil"></i></a>
+                                        <form method="post" action="{{ path('app_entretien_delete', {'id': entretien.id}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet entretien ?');">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ entretien.id) }}">
+                                            <button class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="11" class="text-center">Aucun entretien trouvé</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
