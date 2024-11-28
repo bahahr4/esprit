@@ -1,0 +1,61 @@
+{% extends 'base_user.html.twig' %}
+
+{% block body %}
+    <br><br><br> <br><br><br>
+    <div class="authincation h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-8 col-lg-6">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <h3 class="text-center mb-4 text-primary">Create a Subscription</h3>
+                            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+                            <div class="mb-3">
+                                <label for="type" class="form-label"><strong>Subscription Type</strong></label>
+                                {{ form_widget(form.type, {'attr': {'class': 'form-control', 'placeholder': 'Choose a type (week, month, semester)'}}) }}
+                                <div class="form-text text-danger">{{ form_errors(form.type) }}</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="price" class="form-label"><strong>Price</strong></label>
+                                {{ form_widget(form.price, {'attr': {'class': 'form-control', 'placeholder': 'Enter the subscription price'}}) }}
+                                <div class="form-text text-danger">{{ form_errors(form.price) }}</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="startDate" class="form-label"><strong>Start Date</strong></label>
+                                {{ form_widget(form.startDate, {'attr': {'class': 'form-control'}}) }}
+                                <div class="form-text text-danger">{{ form_errors(form.startDate) }}</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="endDate" class="form-label"><strong>End Date</strong></label>
+                                {{ form_widget(form.endDate, {'attr': {'class': 'form-control'}}) }}
+                                <div class="form-text text-danger">{{ form_errors(form.endDate) }}</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="library" class="form-label"><strong>Library</strong></label>
+                                {{ form_widget(form.library, {'attr': {'class': 'form-control', 'placeholder': 'Select the associated library'}}) }}
+                                <div class="form-text text-danger">{{ form_errors(form.library) }}</div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">Save Subscription</button>
+                            </div>
+
+                            {{ form_end(form) }}
+
+                            <div class="text-center mt-3">
+                                <p>Want to see all subscriptions?
+                                    <a class="text-primary fw-bold" href="{{ path('app_subscription_index') }}">Back to List</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

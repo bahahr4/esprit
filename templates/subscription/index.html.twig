@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Abonnements{% endblock %}
+
+{% block content %}
+
+    <div class="row page-titles mx-0">
+        <div class="col-sm-6 p-md-0">
+            <div class="welcome-text">
+                <h4>Liste des abonnements</h4>
+            </div>
+        </div>
+        <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                <li class="breadcrumb-item active"><a href="#">Abonnements</a></li>
+                <li class="breadcrumb-item active"><a href="#">Liste</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Tous les abonnements</h4>
+                    <a href="{{ path('app_subscription_new') }}" class="btn btn-primary">+ Ajouter un abonnement</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example3" class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Type</th>
+                                <th>Prix</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th>Bibliothèque</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for subscription in subscriptions %}
+                                <tr>
+                                    <td>{{ subscription.id }}</td>
+                                    <td>{{ subscription.type }}</td>
+                                    <td>{{ subscription.price }} TND</td>
+                                    <td>{{ subscription.startDate|date('d/m/Y') }}</td>
+                                    <td>{{ subscription.endDate|date('d/m/Y') }}</td>
+                                    <td>{{ subscription.library.name }}</td>
+                                    <td>
+                                        {% if subscription.isActive() %}
+                                            <span class="badge bg-success">Actif</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">Expired</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('app_subscription_show', {'id': subscription.id}) }}" class="btn btn-sm btn-info"><i class="la la-eye"></i></a>
+                                        <a href="{{ path('app_subscription_edit', {'id': subscription.id}) }}" class="btn btn-sm btn-primary"><i class="la la-pencil"></i></a>
+                                        <form method="post" action="{{ path('app_subscription_delete', {'id': subscription.id}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet abonnement ?');">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ subscription.id) }}">
+                                            <button class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="8" class="text-center">Aucun abonnement trouvé</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,250 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashController!{% endblock %}
+
+{% block content %}
+    {#   <div class="row">
+        <!-- Total Students -->
+        <div class="col-xl-3 col-xxl-3 col-sm-6">
+            <div class="widget-stat card bg-primary overflow-hidden">
+                <div class="card-header">
+                    <h3 class="card-title text-white">Total Students</h3>
+                    <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> {{ total_students }}</h5>
+                </div>
+                <div class="card-body text-center mt-3">
+                    <!-- Section pour afficher le nombre de mâles et de femelles -->
+                    <div class="mb-3 text-white">
+                        <p>Male Students: {{ male_students }}</p>
+                        <p>Female Students: {{ female_students }}</p>
+                    </div>
+
+                    <!-- Graphique circulaire pour la répartition -->
+                    <div class="chart-container" style="position: relative; height:40vh; width:40vh; margin: auto;">
+                        <canvas id="genderChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart.js Script pour la répartition des étudiants -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var ctx = document.getElementById('genderChart').getContext('2d');
+                var genderChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Male', 'Female'],
+                        datasets: [{
+                            label: 'Percentage of Male and Female Students',
+                            data: [{{ male_percentage }}, {{ female_percentage }}],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.8)',
+                                'rgba(255, 99, 132, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: 'white'
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        return tooltipItem.label + ': ' + tooltipItem.raw.toFixed(2) + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+
+        <!-- New Students (Last 7 Days) -->
+        <div class="col-xl-3 col-xxl-3 col-sm-6">
+            <div class="widget-stat card bg-success overflow-hidden">
+                <div class="card-header">
+                    <h3 class="card-title text-white">New Students (last 7 days)</h3>
+                    <h5 class="text-white mb-0">
+                        <i class="fa fa-caret-up"></i> {{ new_students }}
+                    </h5>
+                </div>
+                <div class="card-body text-center mt-4 p-0">
+                    <div class="ico-sparkline">
+                        <div id="spark-bar-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                if (document.getElementById('spark-bar-2')) {
+                    $("#spark-bar-2").sparkline([{{ students_per_day }}], {
+                        type: "bar",
+                        height: "140",
+                        width: "100%",
+                        barWidth: 10,
+                        barSpacing: 5,
+                        barColor: "rgb(200, 255, 135)"
+                    });
+                }
+            });
+        </script>
+
+        <!-- Total Professors -->
+        <div class="col-xl-3 col-xxl-3 col-sm-6">
+            <div class="widget-stat card bg-secondary overflow-hidden">
+                <div class="card-header pb-3">
+                    <h3 class="card-title text-white">Total Professors</h3>
+                    <h5 class="text-white mb-0">
+                        <i class="fa fa-caret-up"></i> {{ total_professors }}
+                    </h5>
+                </div>
+                <div class="card-body p-0 mt-2">
+                    <div class="px-4">
+                        <span class="bar1" data-peity='{ "fill": ["rgb(0, 0, 128)", "rgb(7, 135, 234)"]}'></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="col-xl-3 col-xxl-3 col-sm-6">
+            <div class="widget-stat card bg-secondary overflow-hidden">
+                <div class="card-header pb-3">
+                    <h3 class="card-title text-white">Total Professors</h3>
+                    <h5 class="text-white mb-0">
+                        <i class="fa fa-caret-up"></i> {{ total_professors }}
+                    </h5>
+                </div>
+                <div class="card-body p-0 mt-2">
+                    <div class="px-4">
+                        <span class="bar1" data-peity='{ "fill": ["rgb(0, 0, 128)", "rgb(7, 135, 234)"]}'></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Reclamations (Last 7 Days) -->
+        <div class="col-xl-6 col-xxl-6 col-sm-12">
+            <div class="widget-stat card bg-warning overflow-hidden">
+                <div class="card-header">
+                    <h3 class="card-title text-white">New Reclamations (last 7 days)</h3>
+                    <h5 class="text-white mb-0">
+                        <i class="fa fa-caret-up"></i> {{ newReclamationsCount }}
+                    </h5>
+                </div>
+                <div class="card-body text-center mt-4 p-0">
+                    <canvas id="reclamationsChart" style="height: 400px; width: 100%;"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let width, height, gradient;
+
+            function getGradient(ctx, chartArea) {
+                const chartWidth = chartArea.right - chartArea.left;
+                const chartHeight = chartArea.bottom - chartArea.top;
+                if (!gradient || width !== chartWidth || height !== chartHeight) {
+                    width = chartWidth;
+                    height = chartHeight;
+                    gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                    gradient.addColorStop(0, 'rgba(54, 162, 235, 1)');
+                    gradient.addColorStop(0.5, 'rgba(255, 206, 86, 1)');
+                    gradient.addColorStop(1, 'rgba(255, 99, 132, 1)');
+                }
+
+                return gradient;
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const ctx = document.getElementById('reclamationsChart').getContext('2d');
+
+                const reclamationsChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [
+                            {% for date in students_per_day|keys %}
+                            '{{ date }}',
+                            {% endfor %}
+                        ],
+                        datasets: [{
+                            label: 'New Reclamations',
+                            data: [
+                                {{ students_per_day|join(', ') }}
+                            ],
+                            borderColor: function(context) {
+                                const chart = context.chart;
+                                const {ctx, chartArea} = chart;
+
+                                if (!chartArea) {
+                                    return;
+                                }
+                                return getGradient(ctx, chartArea);
+                            },
+                            fill: true,
+                            tension: 0.4,
+                            backgroundColor: function(context) {
+                                const chart = context.chart;
+                                const {ctx, chartArea} = chart;
+
+                                if (!chartArea) {
+                                    return;
+                                }
+                                return getGradient(ctx, chartArea);
+                            },
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: '#ffffff'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: '#ffffff'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+    </div> #}
+
+
+
+{% endblock %}

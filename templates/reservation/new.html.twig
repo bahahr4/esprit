@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Reservation{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Create New Reservation</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.eventName, 'Event Name', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.eventName, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.eventName) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.club, 'Club', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.club, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.club) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.reservationDate, 'Reservation Date', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.reservationDate, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.reservationDate) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.reason, 'Reason for Reservation', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.reason, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.reason) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.status, 'Status', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.status) }}
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">Save</button>
+
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="{{ path('app_reservation_index') }}" class="btn btn-secondary">Back to list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
