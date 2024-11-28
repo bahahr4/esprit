@@ -15,6 +15,23 @@ class Reply
     private ?int $id = null;
 
     #[ORM\Column(type: 'text')]
+<<<<<<< HEAD
+=======
+    private $objet;
+
+
+    public function getObjet()
+    {
+        return $this->objet;
+    }
+
+
+    public function setObjet($objet): void
+    {
+        $this->objet = $objet;
+    }
+    #[ORM\Column(type: 'text')]
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
     private $content;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -22,7 +39,11 @@ class Reply
 
     #[ORM\ManyToOne(inversedBy: 'replies')]
     #[ORM\JoinColumn(nullable: false)]
+<<<<<<< HEAD
     private ?reclamation $reclamation = null;
+=======
+    private ?Reclamation $reclamation = null;
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
 
     public function getId(): ?int
     {

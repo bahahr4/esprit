@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+<<<<<<< HEAD
 {% block title %}Reclamation{% endblock %}
 
 {% block content %}
@@ -30,4 +31,39 @@
     <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}" class="btn btn-primary">Edit</a>
 
     {{ include('reclamation/_delete_form.html.twig') }}
+=======
+{% block title %}Reclamation Details{% endblock %}
+
+{% block content %}
+    <h1>Reclamation Details</h1>
+
+    <h2>{{ reclamation.type }}</h2>
+
+    <p><strong>ID:</strong> {{ reclamation.id }}</p>
+    <p><strong>Type:</strong> {{ reclamation.type }}</p>
+    <p><strong>Description:</strong> {{ reclamation.description }}</p>
+    <p><strong>Date of Reclamation:</strong> {{ reclamation.daterecl ? reclamation.daterecl|date('Y-m-d') : 'No date provided' }}</p>
+    <p><strong>Email:</strong> {{ reclamation.email }}</p>
+
+    <h3>Replies:</h3>
+    {% if reclamation.replies is not empty %}
+        <ul>
+            {% for reply in reclamation.replies %}
+                <li>
+                    <strong>{{ reply.objet }}</strong>
+                    <p>{{ reply.content }}</p>
+                    <small>Posted on: {{ reply.createdate|date('Y-m-d H:i') }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No replies yet for this reclamation.</p>
+
+        <a href="{{ path('app_reply_new', {'id': reclamation.id}) }}">Reply to this Reclamation</a><br><br>
+
+    {% endif %}
+
+
+    <a href="{{ path('app_reclamation_index') }}">Back to Reclamation List</a>
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
 {% endblock %}

@@ -14,6 +14,7 @@
                         {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
 
                         <div class="form-group mb-3">
+<<<<<<< HEAD
                             {{ form_label(form.name, 'Name', {'label_attr': {'class': 'form-label'}}) }}
                             {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
                             {{ form_errors(form.name) }}
@@ -30,12 +31,26 @@
                             {% if form.email.vars.errors|length > 0 %}
                                 <div class="text-danger mt-1">
                                     {% for error in form.email.vars.errors %}
+=======
+                            {{ form_label(form.type, 'Reservation Type', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.type, {'attr': {'class': 'form-control', 'placeholder': 'Select Reservation Type'}}) }}
+                            {{ form_errors(form.type) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.reason, 'Reason for Reservation', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.reason, {'attr': {'class': 'form-control', 'placeholder': 'Reason for reservation'}}) }}
+                            {% if form.reason.vars.errors|length > 0 %}
+                                <div class="text-danger mt-1">
+                                    {% for error in form.reason.vars.errors %}
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
                                         {{ error.message }}
                                     {% endfor %}
                                 </div>
                             {% endif %}
                         </div>
 
+<<<<<<< HEAD
 
                         <div class="form-group mb-3">
                             {{ form_label(form.PhoneNumberProf, 'Phone Number', {'label_attr': {'class': 'form-label'}}) }}
@@ -50,6 +65,30 @@
                         <button type="submit" class="btn btn-success w-100">Save</button>
 
                         {{ form_end(form) }}
+=======
+                        <div class="form-group mb-3">
+                            {{ form_label(form.reservedAt, 'Reserved Date', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.reservedAt, {'attr': {'class': 'form-control', 'placeholder': 'Select a reserved date'}}) }}
+                            {% if form.reservedAt.vars.errors|length > 0 %}
+                                <div class="text-danger mt-1">
+                                    {% for error in form.reservedAt.vars.errors %}
+                                        {{ error.message }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.createdAt, 'Creation Date', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.createdAt, {'attr': {'class': 'form-control', 'placeholder': 'Creation date (auto-generated)'}}) }}
+                            {{ form_errors(form.createdAt) }}
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">Submit Reservation</button>
+
+                        {{ form_end(form) }}
+
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
                     </div>
                 </div>
 
@@ -59,4 +98,8 @@
 
     {{ form_end(form) }}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
 {% endblock %}

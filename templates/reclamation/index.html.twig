@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+<<<<<<< HEAD
 {% block title %}Reclamations{% endblock %}
 
 {% block content %}
@@ -95,6 +96,49 @@
                 </div>
             </div>
         </div>
+=======
+{% block title %}Reclamation Index{% endblock %}
+
+{% block content %}
+    <h1 class="my-4">Reclamation Index</h1>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Date Reclamation</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for reclamation in reclamations %}
+                <tr>
+                    <td>{{ reclamation.id }}</td>
+                    <td>{{ reclamation.type }}</td>
+                    <td>{{ reclamation.description }}</td>
+                    <td>{{ reclamation.daterecl ? reclamation.daterecl|date('Y-m-d') : '' }}</td>
+                    <td>{{ reclamation.email }}</td>
+                    <td>
+                        <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}" class="btn btn-info btn-sm">Show</a>
+                        {% if reclamation.hasReply %}
+                            <span class="btn btn-secondary btn-sm" disabled>Replied</span>
+                        {% else %}
+                            <a href="{{ path('app_reply_new', {'id': reclamation.id}) }}" class="btn btn-primary btn-sm">Reply</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
     </div>
 
 {% endblock %}

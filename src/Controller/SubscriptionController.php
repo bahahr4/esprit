@@ -32,7 +32,11 @@ final class SubscriptionController extends AbstractController{
             $entityManager->persist($subscription);
             $entityManager->flush();
 
+<<<<<<< HEAD
             return $this->redirectToRoute('app_user', [], Response::HTTP_SEE_OTHER);
+=======
+            return $this->redirectToRoute('app_subscription_index', [], Response::HTTP_SEE_OTHER);
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
         }
 
         return $this->render('subscription/new.html.twig', [
@@ -67,7 +71,11 @@ final class SubscriptionController extends AbstractController{
         ]);
     }
 
+<<<<<<< HEAD
     #[Route('/{id}/delete', name: 'app_subscription_delete', methods: ['POST'])]
+=======
+    #[Route('/{id}', name: 'app_subscription_delete', methods: ['POST'])]
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
     public function delete(Request $request, Subscription $subscription, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$subscription->getId(), $request->getPayload()->getString('_token'))) {

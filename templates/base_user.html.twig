@@ -60,21 +60,42 @@
                         </li>
 
                         <li class="scroll-to-section"><a href="#courses">Courses</a></li>
+<<<<<<< HEAD
                         <li class="scroll-to-section"><a href="{{ path('app_subscription_new') }}">Subscription</a></li>
                         <li class="scroll-to-section"><a href="#contact">Contact Us</a></li>
                         <li class="scroll-to-section"><a href="{{ path('app_entretien_new') }}">Interview</a></li>
+=======
+                        <li class="scroll-to-section"><a href="#contact">Contact Us</a></li>
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
 
                         {% if not app.user %}
                             <li class="scroll-to-section"><a href="{{ path('app_login') }}">Login</a>
                             </li>
                             <li class="scroll-to-section"><a href="{{ path('registration') }}"   > Sign Up </a></li>
                         {% else %}
+<<<<<<< HEAD
                             <li class="scroll-to-section"><a href="javascript:void(0)">{{ app.user.getName() }}</a></li>
                             <li class="scroll-to-section">
                                 <a href="{{ path('app_logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
                             </li>
                             <form id="logout-form" action="{{ path('app_logout') }}" method="POST" style="display: none;">
                             </form>
+=======
+                            <li class="has-sub">
+                                <a href="">{{ app.user.getName() }}</a>
+                                <ul class="sub-menu">
+                                    <li><a href="">Profile</a></li>
+                                    <li><a href="{{ path('app_reclamation_user') }}">Reclamation</a></li>
+                                    <li class="scroll-to-section">
+                                        <a href="{{ path('app_logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
+                                    </li>
+                                    <form id="logout-form" action="{{ path('app_logout') }}" method="POST" style="display: none;">
+                                    </form>
+
+
+                                </ul>
+                            </li>
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
 
 
                         {% endif %}

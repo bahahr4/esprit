@@ -32,10 +32,19 @@ class Library
     #[ORM\OneToMany(mappedBy: 'library', targetEntity: Subscription::class, cascade: ['persist', 'remove'])]
     private Collection $subscriptions;
 
+<<<<<<< HEAD
+=======
+    #[ORM\OneToMany(mappedBy: 'library', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    private Collection $users;
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
 
     public function __construct()
     {
         $this->subscriptions = new ArrayCollection();
+<<<<<<< HEAD
+=======
+        $this->users = new ArrayCollection();
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
     }
 
     public function getId(): ?int
@@ -129,5 +138,33 @@ class Library
         return $this;
     }
 
+<<<<<<< HEAD
 
+=======
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setLibrary($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            if ($user->getLibrary() === $this) {
+                $user->setLibrary(null);
+            }
+        }
+
+        return $this;
+    }
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
 }

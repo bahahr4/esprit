@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'base.html.twig' %}
 
 {% block title %}New Professor{% endblock %}
@@ -43,4 +44,55 @@
             </div>
         </div>
     </div>
+=======
+{% extends 'base_user.html.twig' %}
+
+{% block title %}Create New Reclamation{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1 class="text-center mb-4 font-weight-bold text-primary">Create New Reclamation</h1>
+
+        <div class="card shadow-lg">
+            <div class="card-header bg-dark text-white text-center">
+                <h5 class="mb-0">Fill in the details below</h5>
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+
+                {# Type field with error handling #}
+                <div class="form-group">
+                    {{ form_label(form.type) }}
+                    {{ form_widget(form.type, {'attr': {'class': 'form-control', 'placeholder': 'Enter the type of reclamation'}}) }}
+                    {% if form.type.vars.errors|length > 0 %}
+                        <div class="invalid" style="color: red">
+                            {{ form_errors(form.type) }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                {# Description field with error handling #}
+                <div class="form-group">
+                    {{ form_label(form.description) }}
+                    {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Describe your issue in detail'}}) }}
+                    {% if form.description.vars.errors|length > 0 %}
+                        <div class="invalid" style="color: red">
+                            {{ form_errors(form.description) }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                {# Submit button #}
+                <button type="submit" class="btn btn-primary btn-block mt-4">
+                    <i class="fas fa-paper-plane"></i> Submit Reclamation
+                </button>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap CSS (from CDN or your local file) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
 {% endblock %}

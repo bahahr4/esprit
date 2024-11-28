@@ -12,8 +12,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/library')]
+<<<<<<< HEAD
 final class LibraryController extends AbstractController
 {
+=======
+final class LibraryController extends AbstractController{
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
     #[Route(name: 'app_library_index', methods: ['GET'])]
     public function index(LibraryRepository $libraryRepository): Response
     {
@@ -67,6 +71,7 @@ final class LibraryController extends AbstractController
             'form' => $form,
         ]);
     }
+<<<<<<< HEAD
     #[Route('/{id}/delete', name: 'app_library_delete', methods: ['POST'])]
     public function delete(Request $request, int $id, EntityManagerInterface $entityManager): Response
     {
@@ -77,11 +82,21 @@ final class LibraryController extends AbstractController
         }
 
         if ($this->isCsrfTokenValid('delete' . $library->getId(), $request->request->get('_token'))) {
+=======
+
+    #[Route('/{id}', name: 'app_library_delete', methods: ['POST'])]
+    public function delete(Request $request, Library $library, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$library->getId(), $request->getPayload()->getString('_token'))) {
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
             $entityManager->remove($library);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('app_library_index', [], Response::HTTP_SEE_OTHER);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
 }

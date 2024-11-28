@@ -2,6 +2,7 @@
 
 {% block title %}Edit Subscription{% endblock %}
 
+<<<<<<< HEAD
 {% block content %}
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
@@ -30,4 +31,14 @@
             {{ include('subscription/_delete_form.html.twig') }}
         </div>
     </div>
+=======
+{% block body %}
+    <h1>Edit Subscription</h1>
+
+    {{ include('subscription/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_subscription_index') }}">back to list</a>
+
+    {{ include('subscription/_delete_form.html.twig') }}
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
 {% endblock %}

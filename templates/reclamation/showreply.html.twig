@@ -1,0 +1,45 @@
+{% extends 'base_user.html.twig' %}
+
+{% block title %}Reply Details{% endblock %}
+
+{% block body %}
+    <!-- Heading Section -->
+    <section class="heading-page header-text" id="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h6>Reply Details</h6>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reply Detail Section -->
+    <section class="meetings-page" id="meetings">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bg-white p-4 shadow-sm rounded">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Reply Subject</th>
+                                <td>{{ reply.objet }}</td>
+                            </tr>
+                            <tr>
+                                <th>Reply Content</th>
+                                <td>{{ reply.content }}</td>
+                            </tr>
+                            <tr>
+                                <th>Reply Date</th>
+                                <td>{{ reply.createdate ? reply.createdate|date('Y-m-d H:i') : 'Not provided' }}</td>
+                            </tr>
+
+                        </table>
+
+                        <a href="{{ path('app_reclamation_user') }}" class="btn btn-secondary mt-4">Back to Reclamation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

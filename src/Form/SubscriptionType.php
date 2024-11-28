@@ -6,7 +6,10 @@ use App\Entity\Library;
 use App\Entity\Subscription;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+<<<<<<< HEAD
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+=======
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,6 +19,7 @@ class SubscriptionType extends AbstractType
     {
         $builder
             ->add('type')
+<<<<<<< HEAD
             ->add('price', NumberType::class, [
                 'scale' => 2, // For decimal places if needed
                 'html5' => true,
@@ -23,6 +27,9 @@ class SubscriptionType extends AbstractType
                     'step' => '0.01', // For fractional inputs
                 ],
             ])
+=======
+            ->add('price')
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
             ->add('startDate', null, [
                 'widget' => 'single_text'
             ])

@@ -86,11 +86,14 @@ class DashController extends AbstractController
         return $this->render('user/user.html.twig');
     }
 
+<<<<<<< HEAD
     #[Route('/listprofessors', name: 'app_list_professors')]
     public function listProfessors(): Response
     {
         return $this->render('dash/listprofessors.html.twig');
     }
+=======
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
 
     #[Route('/listbourses', name: 'app_list_bourses')]
     public function listBourses(): Response

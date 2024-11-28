@@ -2,18 +2,26 @@
 
 namespace App\Form;
 
+<<<<<<< HEAD
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\Library;
+=======
+use App\Entity\Library;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
 
 class LibraryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+<<<<<<< HEAD
             ->add('name', TextType::class, [
                 'constraints' => [
                     new Assert\NotBlank(['message' => 'Please provide a name for the library.']),
@@ -65,6 +73,14 @@ class LibraryType extends AbstractType
                 'required' => false,
                 'attr' => ['placeholder' => 'e.g., 09:00-17:00']
             ]);
+=======
+            ->add('name')
+            ->add('bloc')
+            ->add('description')
+            ->add('contact')
+            ->add('openingHours')
+        ;
+>>>>>>> 273b3dc5a7dc47d103f3e51cc1635e6c06d06212
     }
 
     public function configureOptions(OptionsResolver $resolver): void

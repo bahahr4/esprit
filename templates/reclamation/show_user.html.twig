@@ -1,0 +1,75 @@
+{% extends 'base_user.html.twig' %}
+
+{% block title %}Reclamation Details{% endblock %}
+
+{% block body %}
+    <!-- Heading Section -->
+    <section class="heading-page header-text" id="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h6>Reclamation Details</h6>
+                    <h2>Reclamation Information</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reclamation Detail Section -->
+    <section class="meetings-page" id="meetings">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bg-white p-4 shadow-sm rounded">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ reclamation.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Type</th>
+                                <td>{{ reclamation.type }}</td>
+                            </tr>
+                            <tr>
+                                <th>Description</th>
+                                <td>{{ reclamation.description }}</td>
+                            </tr>
+                            <tr>
+                                <th>Date of Reclamation</th>
+                                <td>{{ reclamation.daterecl ? reclamation.daterecl|date('Y-m-d') : 'Not provided' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>{{ reclamation.email }}</td>
+                            </tr>
+                        </table>
+
+                        {% if reclamation.replies|length > 0 %}
+                            <h4>Reply</h4>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Subject</th>
+                                    <td>{{ reclamation.replies[0].objet }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Content</th>
+                                    <td>{{ reclamation.replies[0].content }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Created At</th>
+                                    <td>{{ reclamation.replies[0].createdate|date('Y-m-d H:i') }}</td>
+                                </tr>
+                            </table>
+                        {% else %}
+                            <p>No reply yet.</p>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+{% endblock %}
